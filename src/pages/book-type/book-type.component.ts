@@ -14,7 +14,7 @@ import {Subject} from 'rxjs';
 export class BookTypeComponent implements OnInit, OnDestroy {
   componentDestroyed$: Subject<boolean> = new Subject();
   allBooks: Book[];
-  category: string;
+  genre: string;
   totalNbrBooks: number;
   pageSize = 10;
 
@@ -24,7 +24,7 @@ export class BookTypeComponent implements OnInit, OnDestroy {
     this.activatedRoute.paramMap
       .pipe(take(1))
       .subscribe(params => {
-      this.category = params.get('categoryType');
+      this.genre = params.get('genreType');
       this.loadBooksForPage(1);
     });
   }
@@ -35,7 +35,8 @@ export class BookTypeComponent implements OnInit, OnDestroy {
   }
 
   public loadBooksForPage(pageNbr: number) {
-    this.bookService.getBooksForCategory(this.category, this.pageSize, pageNbr)
+    console.log('loadBooksForPage');
+    this.bookService.getBooksForGenre(this.genre, this.pageSize, pageNbr)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(page => {
       this.allBooks = page.content;
@@ -48,4 +49,11 @@ export class BookTypeComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('book/' + bookId);
   }
 
+    public capitalize(value) {
+      if (value.length > 0) {
+        return value.charAt(0).toUpperCase() + value.substr(1);
+      } else {
+        return value;
+      }
+    }
 }

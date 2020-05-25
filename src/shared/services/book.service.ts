@@ -55,14 +55,24 @@ export class BookService extends BaseService {
 //     return this.httpClient.delete<string>(url, {params: parms, headers: this.constructHeaders()});
 //   }
 
-  public getBooksForCategory(category: string, pageSize: number, pageNum: number): Observable<Page> {
+  public getBooksForGenre(genre: string, pageSize: number, pageNum: number): Observable<Page> {
     const parms = new HttpParams()
-      .append('category', category)
+      .append('genre', genre)
       .append('size', String(pageSize))
       .append('pageNo', String(pageNum));
-    const url = this.booksUrl + '/category';
+    const url = this.booksUrl + '/genre';
+    console.log(url);
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
+
+//   public getBooksForCategory(category: string, pageSize: number, pageNum: number): Observable<Page> {
+//     const parms = new HttpParams()
+//       .append('category', category)
+//       .append('size', String(pageSize))
+//       .append('pageNo', String(pageNum));
+//     const url = this.booksUrl + '/category';
+//     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
+//   }
 
   public updateBooks(): Observable<string> {
     const url = this.booksUrl + '/update';

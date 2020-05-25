@@ -3,13 +3,14 @@ import { BookService } from 'src/shared/services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/models/book.model';
 import { CategoryService } from '../../shared/services/category.service';
+import { GenreService } from '../../shared/services/genre.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'home',
   templateUrl: 'home.component.html',
-  providers: [BookService, CategoryService]
+  providers: [BookService, CategoryService, GenreService]
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
@@ -20,15 +21,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   pageSize = 10;
   searchQuery: string;
 
-  private allCategories = [];
+  public allGenres = [];
 
   constructor(private bookService: BookService,
                 private categoryService: CategoryService,
+                private genreService: GenreService,
                 private router: Router) {
     }
 
     ngOnInit() {
-      this.getAllCategories();
+      this.getAllGenres();
     }
 
     ngOnDestroy(): void {
@@ -36,16 +38,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.componentDestroyed$.complete();
     }
 
-    private getAllCategories() {
-      this.categoryService.getCategories()
+    private getAllGenres() {
+      this.genreService.getGenres()
         .pipe(takeUntil(this.componentDestroyed$))
         .subscribe(myArray => {
-        this.allCategories = myArray;
+        this.allGenres = myArray;
       });
     }
 
     public showBookListBasedOnType(bookType: string) {
-      this.router.navigateByUrl(`category/${bookType}`);
+      //this.router.navigateByUrl(`category/${bookType}`);
+      this.router.navigateByUrl(`genre/${bookType}`);
     }
 
     public browseAllbooks() {
@@ -70,6 +73,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       // navigate to detailpage
       this.router.navigateByUrl(`book/${bookId}`);
   }
+
+    public capitalize(value) {
+      if (value.length > 0) {
+        return value.charAt(0).toUpperCase() + value.substr(1);
+      } else {
+        return value;
+      }
+    }
 
   public resetSearch() {
     this.searchQuery = '';

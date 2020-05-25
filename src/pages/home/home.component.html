@@ -19,20 +19,17 @@
       </div>
     </div>
 
-    <!--
-        <div class="row">
-          <div class="col-12 mt-4">
-            <h4>Browse by Category</h4>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-12 mt-4">
+        <h4>Zoek op genre</h4>
+      </div>
+    </div>
 
-        <div class="row">
-          <button class="half-width" mdbBtn type="button" color="orange" mdbWavesEffect outline="true" *ngFor="let category of allCategories; let odd=odd;"
-                  (click)="showBookListBasedOnType(category.name)" [ngClass]="odd  ? 'mr-3' : 'ml-3'"
-          >{{category.name}}
-          </button>
-        </div>
-    -->
+    <div class="row ml-3">
+      <button class="quarter-width outline" mdbBtn type="button" mdbWavesEffect outline="true" *ngFor="let genre of allGenres;"
+              (click)="showBookListBasedOnType(genre.name)">{{ capitalize(genre.name) }}
+      </button>
+    </div>
 
   </div>
 
