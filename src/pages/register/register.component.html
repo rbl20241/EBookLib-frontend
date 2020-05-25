@@ -1,0 +1,27 @@
+<div class="container image-shadow register mt-4 pb-4" >
+
+  <form class="pt-2" [formGroup]="registerForm" (submit)="doRegister()">
+    <p class="h4 mb-4">Registreren</p>
+
+    <div class="md-form invisible">
+      <input mdbInput placeholder="Password..." type="password" id="password" value="password" formControlName="password" class="form-control">
+      <label for="password">Wachtwoord:</label>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Gebruikersnaam..." type="text" id="username" formControlName="username" class="form-control">
+      <label for="username">Gebruikersnaam:</label>
+      <mdb-error *ngIf="username.errors?.inuse" class="error-text">{{errorMessage}}</mdb-error>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Email..." type="email" id="email" formControlName="email" class="form-control">
+      <label for="email">Email:</label>
+      <mdb-error *ngIf="email.errors?.email" class="error-text">Please enter a valid email address.</mdb-error>
+    </div>
+
+    <button class="button" mdbBtn mdbWavesEffect type="submit" block="true" [disabled]="registerForm.invalid">Opslaan<fa-icon icon="save" class="ml-3"></fa-icon></button>
+    <button class="button mt-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
+
+  </form>
+</div>

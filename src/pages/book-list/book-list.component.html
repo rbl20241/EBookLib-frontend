@@ -1,0 +1,21 @@
+<div *ngIf="books">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Categorie</th>
+      <th>Schrijver</th>
+      <th>Titel</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="cursor: pointer"  *ngFor="let book of books" (click)="goToDetailPage(book.id)">
+      <td>{{ book.libraryMap }}</td>
+      <td>{{ book.author }}</td>
+      <td width="65%">{{ book.title }}<div *ngIf="descriptionFound(book.description)" class="description">{{ shortenDescription(book.description) }}</div></td>
+    </tr>
+    </tbody>
+  </table>
+
+    <button class="button outline" mdbBtn size="sm" mdbWavesEffect (click)="navigate(-1)" *ngIf="canGoBack()"><fa-icon icon="arrow-circle-left" class="mr-2"></fa-icon>VORIGE</button>
+    <button class="button outline" mdbBtn size="sm" mdbWavesEffect (click)="navigate(1)" *ngIf="canLoadMore()">VOLGENDE<fa-icon icon="arrow-circle-right" class="ml-2"></fa-icon></button>
+</div>

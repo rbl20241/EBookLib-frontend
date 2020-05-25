@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "EBookLib-frontend": {
+    "commander": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/EBookLib-frontend",
+            "outputPath": "dist/commander",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,9 +28,16 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
+              "./node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
+              "./node_modules/@fortawesome/fontawesome-svg-core/styles.css",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -66,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "EBookLib-frontend:build"
+            "browserTarget": "commander:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "EBookLib-frontend:build:production"
+              "browserTarget": "commander:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EBookLib-frontend:build"
+            "browserTarget": "commander:build"
           }
         },
         "test": {
@@ -92,6 +99,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -114,15 +124,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "EBookLib-frontend:serve"
+            "devServerTarget": "commander:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "EBookLib-frontend:serve:production"
+              "devServerTarget": "commander:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "EBookLib-frontend"
+    }
+  },
+  "defaultProject": "commander"
 }

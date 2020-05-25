@@ -1,0 +1,9 @@
+<div class="container image-shadow login mt-4 pb-4" >
+  <form class="pt-2" (submit)="update()">
+    <p class="h4 mb-4">Update boeken</p>
+
+    <button class="button" mdbBtn mdbWavesEffect type="submit" block="true" [disabled]="isBusy" id="startButton">Start update<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
+    <button class="button mt-3 outline" mdbBtn mdbWavesEffect type="button" block="true" [disabled]="isBusy" (click)="cancel()" id="cancelButton">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
+  </form>
+
+</div>

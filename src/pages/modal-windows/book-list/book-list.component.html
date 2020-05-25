@@ -1,0 +1,22 @@
+<!-- only shows if books are defined -->
+<div *ngIf="books">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th class="hide_if_mobile">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="cursor: pointer"  *ngFor="let book of books" (click)="goToDetailPage(book.id)">
+      <td><img class="image-shadow" [src]="book.imageLink"/></td>
+      <td>{{ book.title }}</td>
+      <td class="hide_if_mobile">{{ shortenDescription(book.description) }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+    <button mdbBtn outline="true" color="grey" size="sm" mdbWavesEffect (click)="navigate(-1)" *ngIf="canGoBack()"><fa-icon icon="arrow-circle-left" class="mr-2"></fa-icon>PREVIOUS</button>
+    <button mdbBtn outline="true" color="grey" size="sm" mdbWavesEffect (click)="navigate(1)" *ngIf="canLoadMore()">NEXT<fa-icon icon="arrow-circle-right" class="ml-2"></fa-icon></button>
+</div>

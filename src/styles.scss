@@ -1,1 +1,252 @@
 /* You can add global styles to this file, and also import other style files */
+$library-main: #336699;
+.library-main { color: $library-main; }
+
+$library-background: #d6eaff;
+.library-background { color: $library-background; }
+
+html { height: 100%; }
+body {
+  background-color: #d6eaff !important;
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.app {
+   height: 100%;
+}
+
+.navbar-custom {
+  background-color: $library-main;
+}
+
+#lib-container {
+  width: 95%;
+  min-height: 100%;
+  text-align: center;
+  background-color: white;
+}
+
+.image-shadow {
+  -webkit-box-shadow: 15px 15px 30px 0 rgba(0,0,0,0.3);
+  box-shadow: 15px 15px 30px 0 rgba(0,0,0,0.3);
+}
+
+/*==========================================================================*/
+/* Overriding material design Bootstrap styles                              */
+/*==========================================================================*/
+
+/* No capitals on the buttons which is default */
+.btn {
+  text-transform: unset !important;
+}
+.btn[class*=btn-outline-].half-width, .btn[class*=btn-outline-].btn-sm {
+  padding: .5rem .5rem;
+}
+
+
+.point {
+  cursor: pointer;
+}
+
+button.icon {
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  background-color: white;
+}
+
+.search-group {
+  flex-wrap: nowrap;
+}
+
+input.search-control::placeholder {
+  color: grey;
+}
+
+input.search-control {
+  border-bottom: 1px solid #575756;
+  border-top: 1px solid #575756;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
+}
+
+button.half-width {
+  width: 45%;
+  margin-button: .5rem;
+}
+
+button.quarter-width {
+  width: 260px;
+  margin-button: .5rem;
+}
+
+button.full-width, button.half-width, button.quarter-width {
+  border-radius: 10px;
+  color: white;
+  background-color: $library-main;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.full-width:hover, button.half-width:hover, button.quarter-width:hover {
+  color: white;
+}
+
+.button.outline, button.full-width.outline, button.half-width.outline, button.quarter-width.outline {
+  border: 2px solid $library-main;;
+  background-color: white;
+  color: $library-main;
+}
+
+.button.outline:hover, button.full-width.outline:hover, button.half-width.outline:hover, button.quarter-width.outline:hover {
+  border: 2px solid $library-main;;
+  background-color: $library-main;
+  color: white;
+}
+
+
+
+button.search-rb, button.search-lb {
+  border: 1px solid #575756;
+  margin: 0;
+  width: 30px;
+  color: $library-main;
+  background-color: transparent;
+}
+
+// top-l top-r bot-r bot-l
+button.search-rb {
+  border-radius: 0 50px 50px 0;
+  border-left: none;
+}
+button.search-lb {
+  border-radius: 50px 0 0 50px;
+  border-right: none;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  //overflow-y: hidden;
+  white-space: nowrap;
+  //height: 100vh;
+}
+
+// Alert
+
+#modalContainer {
+	background-color:rgba(0, 0, 0, 0.3);
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+	z-index:10000;
+	background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
+}
+
+#alertBox {
+	position:relative;
+	width:300px;
+	min-height:100px;
+	margin-top:50px;
+	border:1px solid #666;
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:20px 30px;
+}
+
+#modalContainer > #alertBox {
+	position:fixed;
+}
+
+#alertBox h1 {
+	margin:0;
+	font:bold 0.9em verdana,arial;
+	background-color:#3073BB;
+	color:#FFF;
+	border-bottom:1px solid #000;
+	padding:2px 0 2px 5px;
+}
+
+#alertBox p {
+	font:0.7em verdana,arial;
+	height:50px;
+	padding-left:5px;
+	margin-left:55px;
+}
+
+#alertBox #closeBtn {
+	display:block;
+	position:relative;
+	margin:5px auto;
+	padding:7px;
+	border:0 none;
+	width:70px;
+	font:0.7em verdana,arial;
+	text-transform:uppercase;
+	text-align:center;
+	color:#FFF;
+	background-color:#357EBD;
+	border-radius: 3px;
+	text-decoration:none;
+}
+
+/* unrelated styles */
+
+#mContainer {
+	position:relative;
+	width:600px;
+	margin:auto;
+	padding:5px;
+	border-top:2px solid #000;
+	border-bottom:2px solid #000;
+	font:0.7em verdana,arial;
+}
+
+h1,h2 {
+	margin:0;
+	padding:4px;
+	font:bold 1.5em verdana;
+	border-bottom:1px solid #000;
+}
+
+code {
+	font-size:1.2em;
+	color:#069;
+}
+
+#credits {
+	position:relative;
+	margin:25px auto 0px auto;
+	width:350px;
+	font:0.7em verdana;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	height:90px;
+	padding-top:4px;
+}
+
+#credits img {
+	float:left;
+	margin:5px 10px 5px 0px;
+	border:1px solid #000000;
+	width:80px;
+	height:79px;
+}
+
+.important {
+	background-color:#F5FCC8;
+	padding:2px;
+}
+
+code span {
+	color:green;
+}

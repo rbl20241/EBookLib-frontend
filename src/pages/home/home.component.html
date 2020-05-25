@@ -1,0 +1,47 @@
+<div class="container" id="lib-container">
+  <div class="row">
+    <div class="input-group search-group mt-2 ml-3 mr-3">
+      <button (click)="resetSearch()" [disabled]="!books" class="search-lb" type="text">
+        <fa-icon icon="arrow-left"></fa-icon>
+      </button>
+      <input (keyup.enter)="searchBooks(1)"
+             [(ngModel)]="searchQuery" type="text" class="search-control" placeholder="Search on title or author">
+      <button (click)="searchBooks(1)" [disabled]="!searchQuery" class="search-rb" type="submit">
+        <fa-icon icon="search"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!books">
+    <div class="row">
+      <div class="col-12 mt-2">
+        <button (click)="browseAllbooks()" mdbBtn mdbWavesEffect type="button" block="true" class="full-width">Zoek<fa-icon icon="book" class="ml-3"></fa-icon></button>
+      </div>
+    </div>
+
+    <!--
+        <div class="row">
+          <div class="col-12 mt-4">
+            <h4>Browse by Category</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="half-width" mdbBtn type="button" color="orange" mdbWavesEffect outline="true" *ngFor="let category of allCategories; let odd=odd;"
+                  (click)="showBookListBasedOnType(category.name)" [ngClass]="odd  ? 'mr-3' : 'ml-3'"
+          >{{category.name}}
+          </button>
+        </div>
+    -->
+
+  </div>
+
+  <book-list *ngIf="books"
+             [books]="books"
+             [totalNbrBooks]="totalNbrBooks"
+             [pageSize]="pageSize"
+             (onLoadMoreBooks)="searchBooks($event)"
+             (onBookClicked)="goToDetailPage($event)">
+  </book-list>
+
+</div>

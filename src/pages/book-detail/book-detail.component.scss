@@ -1,0 +1,72 @@
+$library-main: #336699;
+.library-main { color: $library-main; }
+
+$library-background: #d6eaff;
+.library-background { color: $library-background; }
+
+.detail-text {
+  text-align: left;
+}
+
+.detail-table {
+  margin-top: 20px;
+  margin-left: 5px;
+  margin-bottom: 25px;
+  font-size: 15px;
+  text-align: left;
+  td {
+    padding-right: 20px;
+  }
+  .left-col {
+    font-weight: bold;
+    padding-top: 13px;
+    vertical-align: top;
+  }
+  .right-col {
+    font-weight: normal;
+    padding-top: 13px;
+    vertical-align: top;
+  }
+  .right-col-next {
+    font-weight: normal;
+    padding-top: 0px;
+  }
+}
+
+img {
+  height: 25vh;
+  margin-bottom: 20px;
+}
+
+.book-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.button-table {
+  margin-top:25px;
+}
+
+.detail-button {
+  width: 200px;
+  border-radius: 10px;
+  color: white;
+  background-color: $library-main;
+  font-size: 16px;
+  cursor: pointer;
+  border-spacing: 50px;
+}
+
+.detail-button.outline {
+  border: 2px solid $library-main;;
+  background-color: white;
+  color: $library-main;
+}
+
+.detail-button.outline:hover {
+  border: 2px solid $library-main;;
+  background-color: $library-main;
+  color: white;
+}
+
+

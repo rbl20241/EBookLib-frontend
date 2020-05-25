@@ -1,0 +1,20 @@
+<div class="container image-shadow login mt-4 pb-4" >
+  <form class="pt-2" [formGroup]="loginForm" (submit)="login()">
+    <p class="h4 mb-4">Aanmelden</p>
+
+    <div class="md-form invisible">
+      <input mdbInput placeholder="Password..." type="password" id="password" value="password" formControlName="password" class="form-control">
+      <label for="password">Wachtwoord:</label>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Gebruikersnaam..." type="text" id="username" formControlName="username" class="form-control">
+      <label for="username">Gebruikersnaam:</label>
+    </div>
+
+    <button class="button" mdbBtn mdbWavesEffect type="submit" block="true" [disabled]="loginForm.invalid">Log in<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
+    <button class="button mt-3 outline" block="true" mdbBtn mdbWavesEffect id="registerButton"
+            routerLink="../register"> Registreren<fa-icon icon="pencil-alt" class="ml-3"></fa-icon></button>
+  </form>
+
+</div>

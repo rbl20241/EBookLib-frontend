@@ -1,0 +1,64 @@
+<div class="container image-shadow settings mt-4 pb-4" >
+  <form class="pt-2" [formGroup]="settingsForm" (submit)="saveSettings()">
+    <p class="h4 mb-4">Instellingen</p>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Locatie van boeken..." type="text" id="libraryMap" formControlName="libraryMap" class="form-control">
+      <label for="libraryMap">Locatie van de boeken:</label>
+      <!--<mdb-error *ngIf="libraryMap.errors?" class="error-text">{{errorMessage}}</mdb-error>-->
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Locatie van Calibre..." type="text" id="calibreCommand" formControlName="calibreCommand" class="form-control">
+      <label for="calibreCommand">Locatie van Calibre:</label>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Kopieren naar..." type="text" id="copyTo" formControlName="copyTo" class="form-control">
+      <label for="copyTo">Kopieren naar:</label>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Mailen naar..." type="text" id="mailTo" formControlName="mailTo" class="form-control">
+      <label for="mailTo">Mailen naar:</label>
+    </div>
+
+    <p class="labelview">Mail-instellingen:</p>
+    <table style="width: 100%">
+      <colgroup>
+        <col span="1" style="width: 50%;">
+        <col span="1" style="width: 50%;">
+      </colgroup>
+      <tr>
+        <td class="columns">
+          <div class="md-form">
+            <input mdbInput placeholder="Host..." type="text" id="host" formControlName="mailHost" class="form-control">
+            <label for="host">Host:</label>
+          </div>
+
+          <div class="md-form">
+            <input mdbInput placeholder="Port..." type="text" id="port" formControlName="mailPort" class="form-control">
+            <label for="port">Port:</label>
+          </div>
+        </td>
+        <td class="columns">
+          <div class="md-form">
+            <input mdbInput placeholder="Afzender..." type="text" id="userName" formControlName="mailUserName" class="form-control">
+            <label for="userName">Afzender:</label>
+          </div>
+
+          <div class="md-form">
+            <input mdbInput placeholder="Wachtwoord..." type="password" id="password" formControlName="mailPassword" class="form-control">
+            <label for="password">Wachtwoord:</label>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="row">
+      <button mdbBtn mdbWavesEffect class="half-width ml-3" type="submit" [disabled]="settingsForm.invalid">Opslaan<fa-icon icon="save" class="ml-3"></fa-icon></button>
+      <button mdbBtn mdbWavesEffect class="half-width mr-3 outline" type="button" (click)="cancel()">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,59 @@
+$library-main: #336699;
+.library-main { color: $library-main; }
+
+$library-background: #d6eaff;
+.library-background { color: $library-background; }
+
+#lib-container {
+  background-color: $library-background;
+}
+
+table {
+  background-color: white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: $library-background;
+}
+
+tr {
+  text-align: left;
+  font-size:16px;
+  line-height:1.0;
+}
+
+td .my-tooltip {
+  .tooltip-inner {
+    background-color: blue;
+  }
+}
+
+.button{
+  border-radius: 10px;
+  color: white;
+  background-color: $library-main;
+  font-size: 14px;
+  cursor: pointer;
+ }
+
+.button.outline {
+  border: 2px solid $library-main;;
+  background-color: white;
+  color: $library-main;
+}
+
+.button.outline:hover {
+  border: 2px solid $library-main;;
+  background-color: $library-main;
+  color: white;
+}
+
+.description {
+  margin-top: 10px;
+  font-size:14px;
+}
+
+img {
+    width: 7vh;
+}
+

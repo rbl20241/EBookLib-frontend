@@ -1,0 +1,12 @@
+
+<div class="container" id="lib-container" >
+  <h4>List of {{category.toLowerCase()}} books</h4>
+
+<book-list *ngIf="allBooks"
+           [books]="allBooks"
+           [totalNbrBooks]="totalNbrBooks"
+           [pageSize]="pageSize"
+           (onLoadMoreBooks)="loadBooksForPage($event)"
+           (onBookClicked)="goToDetailPage($event)">
+</book-list>
+</div>
