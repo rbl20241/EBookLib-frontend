@@ -4,6 +4,7 @@ import { Identifier } from './identifier.model';
 
 export class Book {
     id: number;
+    filename: string;
     isbn: string;
     author: string;
     title: string;

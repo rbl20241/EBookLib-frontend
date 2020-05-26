@@ -35,7 +35,6 @@ export class BookTypeComponent implements OnInit, OnDestroy {
   }
 
   public loadBooksForPage(pageNbr: number) {
-    console.log('loadBooksForPage');
     this.bookService.getBooksForGenre(this.genre, this.pageSize, pageNbr)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(page => {

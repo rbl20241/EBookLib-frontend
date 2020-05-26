@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +38,5 @@ export class AppComponent implements OnInit{
     this.authService.logout();
     this.router.navigateByUrl('login');
   }
-
 }
 

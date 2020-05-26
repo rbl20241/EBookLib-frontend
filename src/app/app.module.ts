@@ -23,30 +23,27 @@ import { ButtonsModule, MDBBootstrapModule} from 'angular-bootstrap-md';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalComponent } from '../pages/modal-windows/modal-window.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
-import { RegisterComponent } from '../pages/register/register.component';
+import { RegisterComponent } from 'src/pages/register/register.component';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { AlertDialogComponent } from '../pages/alert-dialog/alert-dialog.component';
-import { AlertDialogService } from '../pages/alert-dialog/alert-dialog.service';
 
 @NgModule({
-declarations: [
-  AppComponent,
-  MyBooksComponent,
-  BookListComponent,
-  BookDetailComponent,
-  LoginForm,
-  SettingsComponent,
-  BooksUpdateComponent,
-  AllBooksComponent,
-  HomeComponent,
-  BookTypeComponent,
-  RegisterComponent,
-  AlertDialogComponent,
-  ModalComponent
-],
-imports: [
-  ButtonsModule,
-  MDBBootstrapModule.forRoot(),
+  declarations: [
+    AppComponent,
+    MyBooksComponent,
+    BookListComponent,
+    BookDetailComponent,
+    LoginForm,
+    SettingsComponent,
+    BooksUpdateComponent,
+    AllBooksComponent,
+    HomeComponent,
+    BookTypeComponent,
+    RegisterComponent,
+    ModalComponent
+  ],
+  imports: [
+    ButtonsModule,
+    MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -57,18 +54,16 @@ imports: [
     FontAwesomeModule,
     TooltipModule
   ],
-providers: [
+  providers: [
     AuthService, {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
       deps: [AuthService, Router]
-    },
-    AlertDialogService
+    }
   ],
-bootstrap: [AppComponent],
-entryComponents: [ AlertDialogComponent ],
-schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule {

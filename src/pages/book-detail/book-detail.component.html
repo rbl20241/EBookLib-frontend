@@ -2,7 +2,8 @@
 
   <div class="row">
     <div class="col-6 col-md-4">
-      <span *ngIf="book.imageLink"><img class="image-shadow" [src]="book.imageLink"/></span>
+      <span *ngIf="book.imageLink"><img class="image-shadow" [src]="readImageLink(book)"/></span>
+      <form class="pt-2" [formGroup]="detailForm">
       <table class="detail-table">
         <tr class="col" *ngFor="let author of book.authors; let first = first">
           <td *ngIf="first" class="left-col">Auteur:</td><td *ngIf="!first"></td>
@@ -28,7 +29,20 @@
           <td *ngIf="first" class="left-col">Identificatie:</td><td *ngIf="!first"></td>
           <td *ngIf="first" class="right-col">{{ createIdentifier(identifier) }}</td><td *ngIf="!first" class="right-col-next">{{ createIdentifier(identifier) }}</td>
         </tr>
+        <tr class="col" *ngIf="!hasValue(book.isbn)">
+          <td class="left-col">ISBN:</td>
+          <td class="right-col">
+            <div class="form">
+              <input mdbInput placeholder="ISBN..." type="text" id="isbn" formControlName="isbn"/>
+            </div>
+          </td>
+        </tr>
+        <tr class="col">
+          <td class="left-col">Gelezen:</td>
+          <td class="right-col"></td>
+        </tr>
       </table>
+      </form>
     </div>
 
     <div class="col-12 col-md-8">
@@ -41,7 +55,7 @@
     <tr>
       <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="cancelButton">Terug<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
       <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="browse()" id="browseButton">Browse<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
-      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="calibre()" id="calibreButton">Calibre<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="save()" id="calibreButton">Calibre<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
       <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="mailButton">Mailen<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
       <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="copyButton">Kopi&#235;ren<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
     </tr>
