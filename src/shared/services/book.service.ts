@@ -74,11 +74,11 @@ export class BookService extends BaseService {
 //     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
 //   }
 
-  public updateBooks(): Observable<string> {
-    const url = this.booksUrl + '/update';
-    console.log(url);
-    return this.httpClient.put<string>(url, {headers: this.constructHeaders()});
-  }
+//   public updateBooks(): Observable<string> {
+//     const url = this.booksUrl + '/update';
+//     console.log(url);
+//     return this.httpClient.put<string>(url, {headers: this.constructHeaders()});
+//   }
 
   public updateBook(book: Book): Observable<string> {
     const url = this.booksUrl + '/update';

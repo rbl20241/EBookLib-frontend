@@ -1,6 +1,7 @@
 import { Author } from './author.model';
 import { Category } from './category.model';
 import { Identifier } from './identifier.model';
+import { Genre } from './genre.model';
 
 export class Book {
     id: number;
@@ -13,7 +14,10 @@ export class Book {
     publisher: string;
     extension: string;
     description: string;
+    isRead: string;
     identifiers: Identifier[];
     authors: Author[];
     categories: Category[];
+    genre: Genre;
+    timestamp: string;
 }

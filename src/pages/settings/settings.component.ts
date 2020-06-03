@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   // convenience getters for easy access to form fields
   get ctrls() { return this.settingsForm.controls; }
   get libraryMap() { return this.ctrls.libraryMap; }
-  get calibreLocation() { return this.ctrls.calibreLocation; }
+  get calibreCommand() { return this.ctrls.calibreCommand; }
   get copyTo() { return this.ctrls.copyTo }
   get mailTo() { return this.ctrls.mailTo }
   get mailHost() { return this.ctrls.mailHost }
@@ -99,7 +99,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.ctrls.id.setValue(settings.id);
       this.ctrls.userId.setValue(settings.userId);
       this.ctrls.libraryMap.setValue(settings.libraryMap);
-      this.ctrls.calibreLocation.setValue(settings.calibreLocation);
+      this.ctrls.calibreCommand.setValue(settings.calibreCommand);
       this.ctrls.copyTo.setValue(settings.copyTo);
       this.ctrls.mailTo.setValue(settings.mailTo);
       this.ctrls.mailHost.setValue(settings.mailHost);

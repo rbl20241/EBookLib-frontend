@@ -25,7 +25,7 @@ export class SettingsService extends BaseService {
       id: '',
       userId: '',
       libraryMap: ['', Validators.required],
-      calibreLocation: ['', Validators.required],
+      calibreCommand: ['', Validators.required],
       copyTo: ['', Validators.required],
       mailTo: ['', Validators.required],
       isDateSort: [false, Validators.required],

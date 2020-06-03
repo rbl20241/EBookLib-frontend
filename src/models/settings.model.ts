@@ -3,7 +3,7 @@ export class Settings {
   userId: number;
 
   libraryMap: string;
-  calibreLocation; string;
+  calibreCommand; string;
   copyTo: string;
   mailTo: string;
 

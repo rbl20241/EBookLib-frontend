@@ -8,21 +8,53 @@ $library-background: #d6eaff;
   text-align: left;
 }
 
+hr {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 2px;
+  color: $library-main;
+}
+
 .detail-table {
-  margin-top: 20px;
+  //margin-top: 5px;
   margin-left: 5px;
+  margin-right: 5px;
   margin-bottom: 25px;
-  font-size: 15px;
+  font-size: 16px;
   text-align: left;
   td {
-    padding-right: 20px;
+    //padding-right: 10px;
+    vertical-align: top;
   }
+  .col-left {
+    width: 30%;
+  }
+  .col-right {
+    width: 18%;
+  }
+}
+
+.left-margin {
+  margin-left: 20px;
+}
+
+.detail-table-left {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  text-align: left;
   .left-col {
     font-weight: bold;
     padding-top: 13px;
+    padding-right: 10px;
     vertical-align: top;
   }
   .right-col {
+    width: 75%;
     font-weight: normal;
     padding-top: 13px;
     vertical-align: top;
@@ -30,6 +62,22 @@ $library-background: #d6eaff;
   .right-col-next {
     font-weight: normal;
     padding-top: 0px;
+  }
+  .input-cell {
+    margin-top: 0px;
+  }
+}
+
+.button-table {
+  //margin-top: 20px;
+  // margin-left: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  text-align: left;
+  td {
+    //margin-left: 0px;
+    //padding-right: 20px;
   }
 }
 
@@ -44,29 +92,29 @@ img {
 }
 
 .button-table {
-  margin-top:25px;
+  //margin-top:25px;
 }
 
-.detail-button {
-  width: 200px;
-  border-radius: 10px;
-  color: white;
-  background-color: $library-main;
-  font-size: 16px;
-  cursor: pointer;
-  border-spacing: 50px;
-}
-
-.detail-button.outline {
-  border: 2px solid $library-main;;
-  background-color: white;
-  color: $library-main;
-}
-
-.detail-button.outline:hover {
-  border: 2px solid $library-main;;
-  background-color: $library-main;
-  color: white;
-}
+// .detail-button {
+//   width: 15%;
+//   border-radius: 10px;
+//   color: white;
+//   background-color: $library-main;
+//   font-size: 16px;
+//   cursor: pointer;
+//   border-spacing: 10px;
+// }
+//
+// .detail-button.outline {
+//   border: 2px solid $library-main;;
+//   background-color: white;
+//   color: $library-main;
+// }
+//
+// .detail-button.outline:hover {
+//   border: 2px solid $library-main;;
+//   background-color: $library-main;
+//   color: white;
+// }
 
 

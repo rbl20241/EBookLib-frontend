@@ -28,23 +28,29 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     isMyBookVar = false;
     showMore = false;
     showLess = false;
+    editMode = false;
+    isReadOrg: boolean;
 
     constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location, private router: Router,
                 private toastr: ToastrService, private userService: UserService, private fb: FormBuilder) { }
 
 
     ngOnInit() {
-        this.detailForm = this.fb.group({
-          ownerId: ['', [Validators.required]],
-          isbn: ''
-        });
-        this.route.paramMap.subscribe(params => {
-            this.bookId = +params.get('id');
-            this.loadBook();
-          });
+      this.detailForm = this.fb.group({
+        isbn: '',
+        isRead: false
+      });
+      this.route.paramMap.subscribe(params => {
+          this.bookId = +params.get('id');
+          this.loadBook();
+      });
+      this.populateForm();
     }
 
     ngOnDestroy(): void {
+      if (this.isReadOrg !== this.ctrls.isRead.value) {
+        this.save();
+      }
       this.componentDestroyed$.next(true);
       this.componentDestroyed$.complete();
     }
@@ -52,13 +58,25 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     // convenience getters for easy access to form fields
     get ctrls() { return this.detailForm.controls; }
     get isbn() { return this.ctrls.isbn as FormControl; }
+    get isRead() { return this.ctrls.isRead as FormControl; }
 
     private loadBook() {
         this.bookService.getBookById(this.bookId)
           .pipe(takeUntil(this.componentDestroyed$))
           .subscribe(book => {
             this.book = book;
+            this.detailForm.value.isRead = this.stringToBoolean(book.isRead);
             this.bookDescription = book.description;
+        });
+    }
+
+    private populateForm() {
+        this.bookService.getBookById(this.bookId)
+          .pipe(takeUntil(this.componentDestroyed$))
+          .subscribe(book => {
+            this.ctrls.isbn.setValue(book.isbn);
+            this.ctrls.isRead.setValue(this.stringToBoolean(book.isRead));
+            this.isReadOrg = this.ctrls.isRead.value;
         });
     }
 
@@ -86,21 +104,35 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  public cancel() {
+  public back() {
     this.location.back();
   }
 
+  public cancel() {
+    this.editMode = false;
+  }
+
+  public edit() {
+    this.editMode = true;
+  }
+
   public save() {
-    const book: Book = this.detailForm.value as Book;
-    alert(JSON.stringify(book));
-    // post won't execute without subscribe. After calling succesfully, go back to last page
-    console.log(book);
-//     this.bookService.updateBook(book)
-//       .pipe(take(1))
-//       .subscribe(response => {
-//         this.showToaster('U');
-//         this.location.back();
-//     });
+    if (this.detailForm.value.isbn.length > 0) {
+      let bookToSave: Book = this.book;
+      bookToSave.isbn = this.detailForm.value.isbn;
+      bookToSave.isRead = this.booleanToString(this.detailForm.value.isRead);
+      //alert(JSON.stringify(bookToSave));
+      // post won't execute without subscribe. After calling succesfully, go back to last page
+      this.bookService.updateBook(bookToSave)
+        .pipe(take(1))
+        .subscribe(response => {
+          this.showToaster('U');
+          if (!this.editMode) {
+            this.location.back();
+          }
+        });
+     }
+     this.editMode = false;
   }
 
   public browse() {
@@ -152,7 +184,23 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     return imageLink;
   }
 
-    private showToaster(crudAction: string) {
-      this.toastr.success('Boek opgeslagen');
+  private showToaster(crudAction: string) {
+    this.toastr.success('Boek opgeslagen');
+  }
+
+  private stringToBoolean(value) {
+     return value === 'Y';
+  }
+
+  private booleanToString(value) {
+    if (value) {
+      return "Y";
     }
+    else {
+      return "N";
+    }
+  }
+
+
+
 }

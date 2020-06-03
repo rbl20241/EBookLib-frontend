@@ -90,7 +90,11 @@ button.quarter-width {
   margin-button: .5rem;
 }
 
-button.full-width, button.half-width, button.quarter-width {
+button.detail-width {
+  width: 100%
+}
+
+button.full-width, button.half-width, button.quarter-width, button.detail-width {
   border-radius: 10px;
   color: white;
   background-color: $library-main;
@@ -98,17 +102,17 @@ button.full-width, button.half-width, button.quarter-width {
   cursor: pointer;
 }
 
-button.full-width:hover, button.half-width:hover, button.quarter-width:hover {
+button.full-width:hover, button.half-width:hover, button.quarter-width:hover, button.detail-width:hover {
   color: white;
 }
 
-.button.outline, button.full-width.outline, button.half-width.outline, button.quarter-width.outline {
+.button.outline, button.full-width.outline, button.half-width.outline, button.quarter-width.outline, button.detail-width.outline {
   border: 2px solid $library-main;;
   background-color: white;
   color: $library-main;
 }
 
-.button.outline:hover, button.full-width.outline:hover, button.half-width.outline:hover, button.quarter-width.outline:hover {
+.button.outline:hover, button.full-width.outline:hover, button.half-width.outline:hover, button.quarter-width.outline:hover, button.detail-width.outline:hover {
   border: 2px solid $library-main;;
   background-color: $library-main;
   color: white;

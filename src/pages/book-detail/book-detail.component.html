@@ -1,76 +1,100 @@
+
+<!--
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+-->
 <div *ngIf="book" class="container pt-3" id="lib-container">
 
   <div class="row">
-    <div class="col-6 col-md-4">
-      <span *ngIf="book.imageLink"><img class="image-shadow" [src]="readImageLink(book)"/></span>
-      <form class="pt-2" [formGroup]="detailForm">
-      <table class="detail-table">
-        <tr class="col" *ngFor="let author of book.authors; let first = first">
-          <td *ngIf="first" class="left-col">Auteur:</td><td *ngIf="!first"></td>
-          <td *ngIf="first" class="right-col">{{ author.name }}</td><td *ngIf="!first" class="right-col-next">{{ author.name }}</td>
-        </tr>
-        <tr class="col" *ngFor="let category of book.categories; let first = first">
-          <td *ngIf="first" class="left-col">Categorie:</td><td *ngIf="!first"></td>
-          <td *ngIf="first" class="right-col">{{ capitalize(category.name) }}</td><td *ngIf="!first" class="right-col-next">{{ capitalize(category.name) }}</td>
-        </tr>
-        <tr class="col" *ngIf="hasValue(book.isbn)">
-          <td class="left-col">ISBN:</td>
-          <td class="right-col">{{ book.isbn }}</td>
-        </tr>
-        <tr class="col" *ngIf="hasValue(book.publisher)">
-          <td class="left-col">Uitgever:</td>
-          <td class="right-col">{{ book.publisher }}</td>
-        </tr>
-        <tr class="col" *ngIf="hasValue(book.extension)">
-          <td class="left-col">Extensie:</td>
-          <td class="right-col">{{ book.extension.toUpperCase() }}</td>
-        </tr>
-        <tr class="col" *ngFor="let identifier of book.identifiers; let first = first">
-          <td *ngIf="first" class="left-col">Identificatie:</td><td *ngIf="!first"></td>
-          <td *ngIf="first" class="right-col">{{ createIdentifier(identifier) }}</td><td *ngIf="!first" class="right-col-next">{{ createIdentifier(identifier) }}</td>
-        </tr>
-        <tr class="col" *ngIf="!hasValue(book.isbn)">
-          <td class="left-col">ISBN:</td>
-          <td class="right-col">
-            <div class="form">
-              <input mdbInput placeholder="ISBN..." type="text" id="isbn" formControlName="isbn"/>
-            </div>
-          </td>
-        </tr>
-        <tr class="col">
-          <td class="left-col">Gelezen:</td>
-          <td class="right-col"></td>
-        </tr>
-      </table>
-      </form>
-    </div>
-
-    <div class="col-12 col-md-8">
-      <span class="row book-title mb-3 ml-1">{{book.title}}</span>
-      <div class="row detail-text mr-1 ml-1">{{book.description}}</div>
-    </div>
-  </div>
-
-  <table class="row button-table">
-    <tr>
-      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="cancelButton">Terug<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
-      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="browse()" id="browseButton">Browse<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
-      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="save()" id="calibreButton">Calibre<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
-      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="mailButton">Mailen<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
-      <td><button class="detail-button ml-3 outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="copyButton">Kopi&#235;ren<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
-    </tr>
-  </table>
-
-  <div class="row button-row">
-<!--
-    <button class="md-button ml-3" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="cancelButton">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
-    <button class="md-button " mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="browseButton">Browse<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
--->
-<!--
-    <button mdbBtn mdbWavesEffect type="submit" block="true" class="detail-button">Calibre<fa-icon icon="book-reader" class="ml-3"></fa-icon></button>
-    <button mdbBtn mdbWavesEffect type="submit" block="true" class="detail-button">Mailen<fa-icon icon="book-reader" class="ml-3"></fa-icon></button>
-    <button mdbBtn mdbWavesEffect type="submit" block="true" class="detail-button">Kopi&#235;ren<fa-icon icon="book-reader" class="ml-3"></fa-icon></button>
--->
-  </div>
-
+    <table class="detail-table">
+      <tr>
+        <td class="col-left">
+          <div class="left-margin">
+            <span *ngIf="book.imageLink"><img class="image-shadow" [src]="readImageLink(book)"/></span>
+            <form [formGroup]="detailForm">
+              <table class="detail-table-left">
+                <tr class="col" *ngFor="let author of book.authors; let first = first">
+                  <td *ngIf="first" class="left-col">Auteur:</td><td *ngIf="!first"></td>
+                  <td *ngIf="first" class="right-col">{{ author.name }}</td><td *ngIf="!first" class="right-col-next">{{ author.name }}</td>
+                </tr>
+                <tr class="col" *ngFor="let category of book.categories; let first = first">
+                  <td *ngIf="first" class="left-col">Categorie:</td><td *ngIf="!first"></td>
+                  <td *ngIf="first" class="right-col">{{ capitalize(category.name) }}</td><td *ngIf="!first" class="right-col-next">{{ capitalize(category.name) }}</td>
+                </tr>
+                <tr class="col" *ngIf="hasValue(book.publisher)">
+                  <td class="left-col">Uitgever:</td>
+                  <td class="right-col">{{ book.publisher }}</td>
+                </tr>
+                <tr class="col" *ngIf="hasValue(book.extension)">
+                  <td class="left-col">Extensie:</td>
+                  <td class="right-col">{{ book.extension.toUpperCase() }}</td>
+                </tr>
+<!--                <tr class="col" *ngFor="let identifier of book.identifiers; let first = first">-->
+<!--                  <td *ngIf="first" class="left-col">Identificatie:</td><td *ngIf="!first"></td>-->
+<!--                  <td *ngIf="first" class="right-col">{{ createIdentifier(identifier) }}</td><td *ngIf="!first" class="right-col-next">{{ createIdentifier(identifier) }}</td>-->
+<!--                </tr>-->
+                <tr class="col" *ngIf="hasValue(book.isbn) && !editMode">
+                  <td class="left-col">ISBN:</td>
+                  <td class="right-col">{{ book.isbn }}</td>
+                </tr>
+                <tr class="col" *ngIf="editMode">
+                  <td class="left-col">ISBN:</td>
+                  <td class="right-col input-cell">
+                    <div class="form">
+                      <input mdbInput placeholder="ISBN..." type="text" id="isbn" formControlName="isbn"/>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="col">
+                  <td class="left-col">Gelezen:</td>
+                  <td class="right-col"><input type="checkbox" id="isRead" formControlName="isRead"></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </td>
+        <td>
+          <div>
+            <span class="row book-title mb-3 ml-1">{{book.title}}</span>
+            <div class="row detail-text mr-1 ml-1">{{book.description}}</div>
+          </div>
+        </td>
+        <td class="col-right">
+          <table class="button-table">
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="copyButton" [disabled]="editMode">Kopi&#235;ren<fa-icon icon="copy" class="ml-3"></fa-icon></button></td>
+            </tr>
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="mailButton" [disabled]="editMode">Mailen<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+            </tr>
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="browse()" id="browseButton" [disabled]="editMode">Browse<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+            </tr>
+            <tr>
+              <td><hr></td>
+            </tr>
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="edit()" id="editButton" [disabled]="editMode">Bewerken<fa-icon icon="edit" class="ml-3"></fa-icon></button></td>
+            </tr>
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="save()" id="saveButton" [disabled]="!editMode">Opslaan<fa-icon icon="save" class="ml-3"></fa-icon></button></td>
+            </tr>
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="cancelButton" [disabled]="!editMode">Annuleren<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+            </tr>
+            <tr>
+              <td><hr></td>
+            </tr>
+            <tr>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="back()" id="backButton" [disabled]="editMode">Terug<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+ </div>
 </div>

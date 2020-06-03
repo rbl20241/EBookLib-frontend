@@ -25,6 +25,7 @@ export class BooksUpdateComponent {
       .subscribe(response => {
         this.isBusy = false;
         this.showToaster();
+        this.location.back();
       }
     );
   }
