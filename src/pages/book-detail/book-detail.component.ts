@@ -35,6 +35,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     editMode = false;
     isReadOrg: boolean;
     isMailModalActive = false;
+    isCopyModalActive = false;
 
     constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location, private router: Router,
                 private toastr: ToastrService, private userService: UserService, private fb: FormBuilder,
@@ -46,7 +47,8 @@ export class BookDetailComponent implements OnInit, OnDestroy {
       this.detailForm = this.fb.group({
         isbn: '',
         isRead: false,
-        email: ''
+        copyTo: '',
+        mailTo: ''
       });
       this.route.paramMap.subscribe(params => {
           this.bookId = +params.get('id');
@@ -67,7 +69,8 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     get ctrls() { return this.detailForm.controls; }
     get isbn() { return this.ctrls.isbn as FormControl; }
     get isRead() { return this.ctrls.isRead as FormControl; }
-    get email() { return this.ctrls.email as FormControl; }
+    get copyTo() { return this.ctrls.copyTo as FormControl; }
+    get mailTo() { return this.ctrls.mailTo as FormControl; }
 
     private loadBook() {
         this.bookService.getBookById(this.bookId)
@@ -84,7 +87,8 @@ export class BookDetailComponent implements OnInit, OnDestroy {
         .subscribe(userId => {
           this.settingsService.getSettingsByUserId(userId)
             .subscribe(settings => {
-              this.ctrls.email.setValue(settings.mailTo);
+              this.ctrls.copyTo.setValue(settings.copyTo);
+              this.ctrls.mailTo.setValue(settings.mailTo);
             });
         });
     }
@@ -115,8 +119,25 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  public openCopyDialog() {
+    this.isCopyModalActive = true;
+    this.isMailModalActive = false;
+    this.modalService.open('copy-modal');
+  }
+
+  public closeCopyDialog() {
+    this.isCopyModalActive = false;
+    this.modalService.close('copy-modal');
+  }
+
+  public copy() {
+    this.bookService.copyBook(this.book.id, this.detailForm.value.copyTo).subscribe(data => this.showToaster('C'));
+    this.closeCopyDialog();
+  }
+
   public openMailDialog() {
     this.isMailModalActive = true;
+    this.isCopyModalActive = false;
     this.modalService.open('mail-modal');
   }
 
@@ -126,7 +147,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   }
 
   public mail() {
-    this.bookService.sendBook(this.book.id, this.detailForm.value.email).subscribe(data => this.showToaster('M'));
+    this.bookService.sendBook(this.book.id, this.detailForm.value.mailTo).subscribe(data => this.showToaster('M'));
     this.closeMailDialog();
   }
 
@@ -214,8 +235,8 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     if (action === 'S') {
       this.toastr.success('Boek opgeslagen');
     }
-    else if (action === 'S') {
-      this.toastr.success('Boek wordt verzonden');
+    else if (action === 'C') {
+      this.toastr.success('Boek is gekopieerd');
     }
     else if (action === 'M') {
       this.toastr.success('Boek is verzonden');

@@ -10,6 +10,10 @@ $library-main: #336699;
 /* prevent labels to turn blue when cursor enters field */
 .md-form input:not([readonly]) + label {
   color: #757575;
+  font-size: 18px;
+  color: $library-main;
+//  font-style: italic;
+//  font-weight: bold;
   text-align: left;
 }
 

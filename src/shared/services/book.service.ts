@@ -98,6 +98,14 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>(url, {params: parms, headers: this.constructHeaders()});
   }
 
+  public copyBook(id: number, copyTo: string) : Observable<Book>{
+    const parms = new HttpParams()
+      .append('bookId', String(id))
+      .append('copyTo', String(copyTo));
+    const url = this.booksUrl + '/copy';
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+  }
+
   public sendBook(id: number, mailTo: string) : Observable<Book>{
     const parms = new HttpParams()
       .append('bookId', String(id))
