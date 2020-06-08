@@ -40,10 +40,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
       response => {
         this.showToaster();
-        console.log('before')
-        this.router.navigateByUrl('/settings');
-        console.log('after')
-      // this.location.back();
+        this.location.back();
     },
     error => {
         this.errorMessage = error.error.message;

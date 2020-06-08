@@ -17,7 +17,6 @@ export class BookService extends BaseService {
   public getBookById(id: number): Observable<Book> {
     const parms = new HttpParams().append('bookId', String(id));
     const url = this.booksUrl + '/bookid';
-    console.log(url + parms);
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
   }
 
@@ -61,7 +60,6 @@ export class BookService extends BaseService {
       .append('size', String(pageSize))
       .append('pageNo', String(pageNum));
     const url = this.booksUrl + '/genre';
-    console.log(url);
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
 
@@ -91,7 +89,6 @@ export class BookService extends BaseService {
       .append('size', String(size))
       .append('pageNo', String(pageNum));
     const url = this.booksUrl + '/search';
-    console.log(url);
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
 
@@ -99,6 +96,14 @@ export class BookService extends BaseService {
     const parms = new HttpParams().append('identifier', isbn);
     const url = this.BASE_URL + '/search/isbn';
     return this.httpClient.get<Book>(url, {params: parms, headers: this.constructHeaders()});
+  }
+
+  public sendBook(id: number, mailTo: string) : Observable<Book>{
+    const parms = new HttpParams()
+      .append('bookId', String(id))
+      .append('mailTo', String(mailTo));
+    const url = this.booksUrl + '/mail';
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
   }
 
 }

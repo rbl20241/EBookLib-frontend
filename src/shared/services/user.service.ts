@@ -12,8 +12,8 @@ export class UserService extends BaseService {
   }
 
   public getCurrentUserId(): Observable<number> {
-    const url = `/users/currentuserid`;
-    return this.httpClient.get<number>(this.BASE_URL + url, {headers: this.constructHeaders()});
+    const url = this.BASE_URL + '/users/currentuserid';
+    return this.httpClient.get<number>(url, {headers: this.constructHeaders()});
   }
 
   public addUser(user: User): Observable<string> {

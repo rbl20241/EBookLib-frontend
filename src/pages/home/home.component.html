@@ -27,7 +27,7 @@
 
     <div class="row ml-3">
       <button class="quarter-width outline" mdbBtn type="button" mdbWavesEffect outline="true" *ngFor="let genre of allGenres;"
-              (click)="showBookListBasedOnType(genre.name)">{{ capitalize(genre.name) }}
+              (click)="showBookListBasedOnType(genre.name)">{{ genre.name }}
       </button>
     </div>
 

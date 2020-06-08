@@ -23,7 +23,7 @@ table, th, td {
                 </tr>
                 <tr class="col" *ngFor="let category of book.categories; let first = first">
                   <td *ngIf="first" class="left-col">Categorie:</td><td *ngIf="!first"></td>
-                  <td *ngIf="first" class="right-col">{{ capitalize(category.name) }}</td><td *ngIf="!first" class="right-col-next">{{ capitalize(category.name) }}</td>
+                  <td *ngIf="first" class="right-col">{{ category.name }}</td><td *ngIf="!first" class="right-col-next">{{ category.name }}</td>
                 </tr>
                 <tr class="col" *ngIf="hasValue(book.publisher)">
                   <td class="left-col">Uitgever:</td>
@@ -69,10 +69,10 @@ table, th, td {
               <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="copyButton" [disabled]="editMode">Kopi&#235;ren<fa-icon icon="copy" class="ml-3"></fa-icon></button></td>
             </tr>
             <tr>
-              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="cancel()" id="mailButton" [disabled]="editMode">Mailen<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="openMailDialog()" id="mailButton" [disabled]="editMode">Mailen<fa-icon icon="envelope" class="ml-3"></fa-icon></button></td>
             </tr>
             <tr>
-              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="browse()" id="browseButton" [disabled]="editMode">Browse<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="browse()" id="browseButton" [disabled]="editMode">Browse<fa-icon icon="globe" class="ml-3"></fa-icon></button></td>
             </tr>
             <tr>
               <td><hr></td>
@@ -90,11 +90,27 @@ table, th, td {
               <td><hr></td>
             </tr>
             <tr>
-              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="back()" id="backButton" [disabled]="editMode">Terug<fa-icon icon="times-circle" class="ml-3"></fa-icon></button></td>
+              <td><button class="detail-width outline" mdbBtn mdbWavesEffect type="button" block="true" (click)="back()" id="backButton" [disabled]="editMode">Terug<fa-icon icon="angle-double-left" class="ml-3"></fa-icon></button></td>
             </tr>
           </table>
         </td>
       </tr>
     </table>
  </div>
+
+
+  <jw-modal id="mail-modal">
+    <div *ngIf="isMailModalActive">
+      <form [formGroup]="detailForm">
+        <div class="md-form">
+          <input mdbInput placeholder="Email..." type="email" id="email" formControlName="email" class="form-control">
+          <label for="email">{{ book.title }} mailen naar:</label>
+          <!--        <mdb-error *ngIf="email.errors?.email" class="error-text">Please enter a valid email address.</mdb-error>-->
+        </div>
+      </form>
+      <div class="divider"></div>
+      <button class="half-width outline mr-2" mdbBtn mdbWavesEffect (click)="closeMailDialog()">Annuleren<fa-icon icon="times-circle" class="ml-2"></fa-icon></button>
+      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="mail()">Mailen<fa-icon icon="check-circle" class="ml-2"></fa-icon></button>
+    </div>
+  </jw-modal>
 </div>

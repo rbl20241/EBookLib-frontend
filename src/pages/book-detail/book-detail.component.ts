@@ -1,13 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from 'src/models/book.model';
+import { Settings } from 'src/models/settings.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { BookService } from 'src/shared/services/book.service';
 import { UserService } from '../../shared/services/user.service';
+import { SettingsService } from '../../shared/services/settings.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ModalService } from '../../shared/services/modal.service';
 
 import * as JSZip from 'jszip';
 
@@ -15,7 +18,7 @@ import * as JSZip from 'jszip';
     selector: 'app-book-detail',
     templateUrl: 'book-detail.component.html',
     styleUrls: ['book-detail.component.scss'],
-    providers: [ BookService, UserService ]
+    providers: [ BookService, UserService, SettingsService ]
 })
 export class BookDetailComponent implements OnInit, OnDestroy {
     componentDestroyed$: Subject<boolean> = new Subject();
@@ -23,6 +26,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     book: Book;
     detailForm: FormGroup;
     bookId: number;
+    userId: number;
     bookDescription: string;
     cutPosition: number;
     isMyBookVar = false;
@@ -30,15 +34,19 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     showLess = false;
     editMode = false;
     isReadOrg: boolean;
+    isMailModalActive = false;
 
     constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location, private router: Router,
-                private toastr: ToastrService, private userService: UserService, private fb: FormBuilder) { }
+                private toastr: ToastrService, private userService: UserService, private fb: FormBuilder,
+                private modalService: ModalService, private settingsService: SettingsService) { }
 
 
     ngOnInit() {
+      this.loadSettings();
       this.detailForm = this.fb.group({
         isbn: '',
-        isRead: false
+        isRead: false,
+        email: ''
       });
       this.route.paramMap.subscribe(params => {
           this.bookId = +params.get('id');
@@ -59,6 +67,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     get ctrls() { return this.detailForm.controls; }
     get isbn() { return this.ctrls.isbn as FormControl; }
     get isRead() { return this.ctrls.isRead as FormControl; }
+    get email() { return this.ctrls.email as FormControl; }
 
     private loadBook() {
         this.bookService.getBookById(this.bookId)
@@ -70,6 +79,16 @@ export class BookDetailComponent implements OnInit, OnDestroy {
         });
     }
 
+    private loadSettings() {
+      this.userService.getCurrentUserId()
+        .subscribe(userId => {
+          this.settingsService.getSettingsByUserId(userId)
+            .subscribe(settings => {
+              this.ctrls.email.setValue(settings.mailTo);
+            });
+        });
+    }
+
     private populateForm() {
         this.bookService.getBookById(this.bookId)
           .pipe(takeUntil(this.componentDestroyed$))
@@ -78,14 +97,6 @@ export class BookDetailComponent implements OnInit, OnDestroy {
             this.ctrls.isRead.setValue(this.stringToBoolean(book.isRead));
             this.isReadOrg = this.ctrls.isRead.value;
         });
-    }
-
-    public capitalize(value) {
-      if (value.length > 0) {
-        return value.charAt(0).toUpperCase() + value.substr(1);
-      } else {
-        return value;
-      }
     }
 
   public hasValue(value): boolean {
@@ -102,6 +113,21 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     } else {
       return identifier.value;
     }
+  }
+
+  public openMailDialog() {
+    this.isMailModalActive = true;
+    this.modalService.open('mail-modal');
+  }
+
+  public closeMailDialog() {
+    this.isMailModalActive = false;
+    this.modalService.close('mail-modal');
+  }
+
+  public mail() {
+    this.bookService.sendBook(this.book.id, this.detailForm.value.email).subscribe(data => this.showToaster('M'));
+    this.closeMailDialog();
   }
 
   public back() {
@@ -126,7 +152,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
       this.bookService.updateBook(bookToSave)
         .pipe(take(1))
         .subscribe(response => {
-          this.showToaster('U');
+          this.showToaster('S');
           if (!this.editMode) {
             this.location.back();
           }
@@ -184,8 +210,16 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     return imageLink;
   }
 
-  private showToaster(crudAction: string) {
-    this.toastr.success('Boek opgeslagen');
+  private showToaster(action: string) {
+    if (action === 'S') {
+      this.toastr.success('Boek opgeslagen');
+    }
+    else if (action === 'S') {
+      this.toastr.success('Boek wordt verzonden');
+    }
+    else if (action === 'M') {
+      this.toastr.success('Boek is verzonden');
+    }
   }
 
   private stringToBoolean(value) {

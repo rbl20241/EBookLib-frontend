@@ -39,6 +39,10 @@ body {
 /* Overriding material design Bootstrap styles                              */
 /*==========================================================================*/
 
+label {
+  font-size: 20px;
+}
+
 /* No capitals on the buttons which is default */
 .btn {
   text-transform: unset !important;
@@ -145,4 +149,58 @@ button.search-lb {
   //height: 100vh;
 }
 
+jw-modal {
+  /* modals are hidden by default */
+  display: none;
+
+  .jw-modal {
+    /* modal container fixed across whole screen */
+    position: fixed;
+    top: 20%;
+    right: 0;
+    bottom: 0;
+    left: 30%;
+
+    /* z-index must be higher than .jw-modal-background */
+    z-index: 1000;
+
+    /* enables scrolling for tall modals */
+    overflow: auto;
+
+    .jw-modal-body {
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      border: solid $library-main 1px;
+      /* margin exposes part of the modal background */
+      width: 50%;
+    }
+    .jw-modal-font{
+      font-family: Helvetica, sans-serif;
+      font-size: 25px;
+    }
+
+  }
+
+  .jw-modal-background {
+    /* modal background fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* semi-transparent black  */
+    background-color: $library-background; /* #000; */
+    opacity: 0.75;
+
+    /* z-index must be below .jw-modal and above everything else  */
+    z-index: 900;
+  }
+}
+
+body.jw-modal-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
 

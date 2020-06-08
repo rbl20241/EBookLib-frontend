@@ -48,11 +48,4 @@ export class BookTypeComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('book/' + bookId);
   }
 
-    public capitalize(value) {
-      if (value.length > 0) {
-        return value.charAt(0).toUpperCase() + value.substr(1);
-      } else {
-        return value;
-      }
-    }
 }
