@@ -5,7 +5,7 @@
         <fa-icon icon="arrow-left"></fa-icon>
       </button>
       <input (keyup.enter)="searchBooks(1)"
-             [(ngModel)]="searchQuery" type="text" class="search-control" placeholder="Search on title or author">
+             [(ngModel)]="searchQuery" type="text" class="search-control" placeholder="Zoek op titel of auteur">
       <button (click)="searchBooks(1)" [disabled]="!searchQuery" class="search-rb" type="submit">
         <fa-icon icon="search"></fa-icon>
       </button>
@@ -21,7 +21,7 @@
 
     <div class="row">
       <div class="col-12 mt-4">
-        <h4>Zoek op genre</h4>
+        <h4>Selecteer genre</h4>
       </div>
     </div>
 

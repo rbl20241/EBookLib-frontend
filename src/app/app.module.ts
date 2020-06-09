@@ -25,6 +25,7 @@ import { ModalComponent } from '../pages/modal-windows/modal-window.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { RegisterComponent } from 'src/pages/register/register.component';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { SearchComponent } from 'src/pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     HomeComponent,
     BookTypeComponent,
     RegisterComponent,
-    ModalComponent
+    ModalComponent,
+    SearchComponent
   ],
   imports: [
     ButtonsModule,

@@ -129,6 +129,8 @@ button.search-rb, button.search-lb {
 // top-l top-r bot-r bot-l
 button.search-rb {
   border-radius: 0 50px 50px 0;
+  background-color: $library-main;
+  color: white;
   border-left: none;
 }
 button.search-lb {

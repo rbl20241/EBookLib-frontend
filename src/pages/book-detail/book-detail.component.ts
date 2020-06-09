@@ -131,7 +131,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   }
 
   public copy() {
-    this.bookService.copyBook(this.book.id, this.detailForm.value.copyTo).subscribe(data => this.showToaster('C'));
+    this.bookService.copyBook(this.book.id, this.detailForm.value.copyTo).subscribe(data => this.showToaster('K'));
     this.closeCopyDialog();
   }
 
@@ -194,17 +194,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   }
 
   public calibre() {
-        this.bookService.getBookById(this.bookId)
-          .pipe(takeUntil(this.componentDestroyed$))
-          .subscribe(book => {
-            this.book = book;
-            this.bookDescription = book.description;
-        });
-
-
-
-    console.log('calibre (' + this.bookId + ')');
-    this.bookService.openCalibre(this.bookId);
+    this.bookService.openCalibre(this.bookId).subscribe(data => this.showToaster('C'));
   }
 
   public readImageLink(book: Book): string {
@@ -236,6 +226,9 @@ export class BookDetailComponent implements OnInit, OnDestroy {
       this.toastr.success('Boek opgeslagen');
     }
     else if (action === 'C') {
+      this.toastr.success('Calibre wordt gestart');
+    }
+    else if (action === 'K') {
       this.toastr.success('Boek is gekopieerd');
     }
     else if (action === 'M') {

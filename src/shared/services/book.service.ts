@@ -20,13 +20,6 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
   }
 
-  public openCalibre(id: number): Observable<Book> {
-    const parms = new HttpParams().append('bookId', String(id));
-    const url = this.booksUrl + '/calibre/bookid';
-    console.log("<-- CALIBRE --> " + url + parms);
-    return this.httpClient.put<Book>( url, {params: parms, headers: this.constructHeaders()});
-  }
-
   public getAllBooks(pageSize: number, pageNum: number): Observable<Page> {
     // httpParams is immutable therefore we need to chain the append method!
     const parms = new HttpParams().append('size', String(pageSize)).append( 'pageNo', String(pageNum));
@@ -98,7 +91,7 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>(url, {params: parms, headers: this.constructHeaders()});
   }
 
-  public copyBook(id: number, copyTo: string) : Observable<Book>{
+  public copyBook(id: number, copyTo: string) : Observable<Book> {
     const parms = new HttpParams()
       .append('bookId', String(id))
       .append('copyTo', String(copyTo));
@@ -106,12 +99,27 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
   }
 
-  public sendBook(id: number, mailTo: string) : Observable<Book>{
+  public sendBook(id: number, mailTo: string) : Observable<Book> {
     const parms = new HttpParams()
       .append('bookId', String(id))
       .append('mailTo', String(mailTo));
     const url = this.booksUrl + '/mail';
+    console.log(url + ' ' + id)
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+  }
+
+  public openCalibre(id: number): Observable<Book> {
+    const parms = new HttpParams()
+      .append('bookId', String(id))
+      .append('mailTo', String('rene.ordina@gmail.com'));
+    const url = this.booksUrl + '/calibre';
+    console.log(url + ' ' + id)
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+/*
+    const parms = new HttpParams().append('bookId', String(id));
+    const url = this.booksUrl + '/calibre';
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+ */
   }
 
 }
