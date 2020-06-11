@@ -1,0 +1,80 @@
+$library-main: #336699;
+.library-main { color: $library-main; }
+
+hr {
+  margin-top: 30px;
+}
+
+button.home-width {
+  width: 48%;
+  margin-button: .5rem;
+}
+
+button.home-width {
+  border-radius: 10px;
+  color: white;
+  background-color: $library-main;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.home-width:hover {
+  color: white;
+}
+
+button.home-width.outline {
+  border: 2px solid $library-main;;
+  background-color: white;
+  color: $library-main;
+}
+
+button.home-width.outline:hover {
+  border: 2px solid $library-main;;
+  background-color: $library-main;
+  color: white;
+}
+
+button.extended-search-rb {
+  border: 1px solid $library-main;
+  border-radius: 0 50px 50px 0;
+  border-left: none;
+  background-color: white;
+}
+
+input.input-search {
+  border: 1px solid $library-main;
+  border-radius: 50px 0 0 50px;
+  border-right: none;
+//  align: center;
+//   width: 90%;
+  text-indent: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+select {
+  border: 1px solid $library-main;
+  border-radius: 10px;
+  align: center;
+  width: 95%;
+}
+
+.search-table {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 25px;
+  font-size: 16px;
+  text-align: left;
+  td {
+    vertical-align: center;
+  }
+  .col-left {
+    padding-right: 20px;
+  }
+  .col-right {
+    width: 18%;
+  }
+}
+
+
+

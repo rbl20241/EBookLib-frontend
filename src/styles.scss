@@ -66,10 +66,11 @@ input.search-control::placeholder {
 }
 
 input.search-control {
-  border-bottom: 1px solid #575756;
-  border-top: 1px solid #575756;
+  border-bottom: 1px solid $library-main;
+  border-top: 1px solid $library-main;
   border-left: none;
   border-right: none;
+  align: center;
   width: 100%;
 
 }
@@ -119,7 +120,7 @@ button.full-width:hover, button.half-width:hover, button.quarter-width:hover, bu
 
 
 button.search-rb, button.search-lb {
-  border: 1px solid #575756;
+  border: 1px solid $library-main;
   margin: 0;
   width: 30px;
   color: $library-main;
@@ -207,4 +208,21 @@ body.jw-modal-open {
   /* body overflow is hidden to hide main scrollbar when modal window is open */
   overflow: hidden;
 }
+
+hr {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 2px;
+  color: $library-main;
+}
+
+h4 {
+  color: $library-main;
+}
+
+
 

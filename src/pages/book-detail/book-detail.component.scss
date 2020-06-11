@@ -8,26 +8,13 @@ $library-background: #d6eaff;
   text-align: left;
 }
 
-hr {
-  display: block;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: inset;
-  border-width: 2px;
-  color: $library-main;
-}
-
 .detail-table {
-  //margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 25px;
   font-size: 16px;
   text-align: left;
   td {
-    //padding-right: 10px;
     vertical-align: top;
   }
   .col-left {
@@ -69,16 +56,10 @@ hr {
 }
 
 .button-table {
-  //margin-top: 20px;
-  // margin-left: 5px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 25px;
   text-align: left;
-  td {
-    //margin-left: 0px;
-    //padding-right: 20px;
-  }
 }
 
 img {
@@ -90,31 +71,5 @@ img {
   font-size: 20px;
   font-weight: bold;
 }
-
-.button-table {
-  //margin-top:25px;
-}
-
-// .detail-button {
-//   width: 15%;
-//   border-radius: 10px;
-//   color: white;
-//   background-color: $library-main;
-//   font-size: 16px;
-//   cursor: pointer;
-//   border-spacing: 10px;
-// }
-//
-// .detail-button.outline {
-//   border: 2px solid $library-main;;
-//   background-color: white;
-//   color: $library-main;
-// }
-//
-// .detail-button.outline:hover {
-//   border: 2px solid $library-main;;
-//   background-color: $library-main;
-//   color: white;
-// }
 
 

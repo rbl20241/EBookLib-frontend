@@ -85,6 +85,17 @@ export class BookService extends BaseService {
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
 
+  public extendedSearchBooks(query, category, extension, pageNum, size): Observable<Page> {
+    const parms = new HttpParams()
+      .append('query', query)
+      .append('category', category)
+      .append('extension', extension)
+      .append('size', String(size))
+      .append('pageNo', String(pageNum));
+    const url = this.booksUrl + '/extendedsearch';
+    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
+  }
+
   public getBookByIsbn(isbn: string): Observable<Book> {
     const parms = new HttpParams().append('identifier', isbn);
     const url = this.BASE_URL + '/search/isbn';

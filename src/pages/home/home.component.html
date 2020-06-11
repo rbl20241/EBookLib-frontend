@@ -13,11 +13,14 @@
   </div>
 
   <div *ngIf="!books">
-    <div class="row">
-      <div class="col-12 mt-2">
-        <button (click)="browseAllbooks()" mdbBtn mdbWavesEffect type="button" block="true" class="full-width">Zoek<fa-icon icon="book" class="ml-3"></fa-icon></button>
-      </div>
+    <div class="row col-12 mt-2 ml-1 mr-2">
+      <!--<div class="col-12 mt-2">-->
+        <button (click)="browseAllbooks()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width">Toon alle boeken<fa-icon icon="book" class="ml-3"></fa-icon></button>
+        <button (click)="openSearchDialog()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width outline">Uitgebreid zoeken<fa-icon icon="book" class="ml-3"></fa-icon></button>
+      <!--</div>-->
     </div>
+
+    <div><hr></div>
 
     <div class="row">
       <div class="col-12 mt-4">
@@ -40,5 +43,56 @@
              (onLoadMoreBooks)="searchBooks($event)"
              (onBookClicked)="goToDetailPage($event)">
   </book-list>
+
+  <jw-modal id="search-modal">
+    <div *ngIf="isSearchModalActive">
+      <div class="jw-modal-title">Uitgebreid zoeken</div>
+      <div class="container">
+
+        <div class="row">
+          <div class="input-group search-group mt-3 ml-3 mr-3 mb-3">
+            <input [(ngModel)]="extendedSearchQuery" type="text" class="input-search" placeholder="Zoek op titel of auteur">
+            <button (click)="resetSearchInput()" [disabled]="!extendedSearchQuery" class="extended-search-rb" type="text">
+              <fa-icon icon="window-close"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="mt-3 ml-3 mb-3">
+          <table class="search-table">
+            <tr>
+              <td class="col-left">Categorie:</td>
+              <td>
+                <select [(ngModel)]="searchCategory" class="browser-default custom-select">
+                  <option selected>-- Kies categorie --</option>
+                  <option *ngFor="let category of allCategories;" value={{category.name}}>{{category.name}}</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="col-left">Bestandsformaat:</td>
+              <td>
+                <select [(ngModel)]="searchExtension" class="browser-default custom-select">
+                  <option selected>-- Kies bestandsformaat --</option>
+                  <option value="epub">epub</option>
+                  <option value="mobi">mobi</option>
+                  <option value="pdf">pdf</option>
+                  <option value="cbr">cbr</option>
+                </select>
+              </td>
+            </tr>
+
+          </table>
+          </div>
+        </div>
+
+      </div>
+      <div class="divider"></div>
+      <button class="half-width outline mr-2" mdbBtn mdbWavesEffect (click)="closeSearchDialog()">Annuleren<fa-icon icon="times-circle" class="ml-2"></fa-icon></button>
+      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="extendedSearchBooks(1)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
+    </div>
+  </jw-modal>
 
 </div>
