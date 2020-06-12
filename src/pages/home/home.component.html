@@ -1,23 +1,21 @@
 <div class="container" id="lib-container">
-  <div class="row">
-    <div class="input-group search-group mt-2 ml-3 mr-3">
-      <button (click)="resetSearch()" [disabled]="!books" class="search-lb" type="text">
-        <fa-icon icon="arrow-left"></fa-icon>
-      </button>
-      <input (keyup.enter)="searchBooks(1)"
-             [(ngModel)]="searchQuery" type="text" class="search-control" placeholder="Zoek op titel of auteur">
-      <button (click)="searchBooks(1)" [disabled]="!searchQuery" class="search-rb" type="submit">
-        <fa-icon icon="search"></fa-icon>
-      </button>
-    </div>
-  </div>
+<!--  <div class="row">-->
+<!--    <div class="input-group search-group mt-2 ml-3 mr-3">-->
+<!--      <button (click)="resetSearch()" [disabled]="!books" class="search-lb" type="text">-->
+<!--        <fa-icon icon="arrow-left"></fa-icon>-->
+<!--      </button>-->
+<!--      <input (keyup.enter)="searchBooks(1)"-->
+<!--             [(ngModel)]="searchQuery" type="text" class="search-control" placeholder="Zoek op titel of auteur">-->
+<!--      <button (click)="searchBooks(1)" [disabled]="!searchQuery" class="search-rb" type="submit">-->
+<!--        <fa-icon icon="search"></fa-icon>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div *ngIf="!books">
     <div class="row col-12 mt-2 ml-1 mr-2">
-      <!--<div class="col-12 mt-2">-->
-        <button (click)="browseAllbooks()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width">Toon alle boeken<fa-icon icon="book" class="ml-3"></fa-icon></button>
-        <button (click)="openSearchDialog()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width outline">Uitgebreid zoeken<fa-icon icon="book" class="ml-3"></fa-icon></button>
-      <!--</div>-->
+      <button (click)="browseAllbooks()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width">Toon alle boeken<fa-icon icon="book" class="ml-3"></fa-icon></button>
+      <button (click)="openSearchDialog()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width outline">Zoeken<fa-icon icon="search" class="ml-3"></fa-icon></button>
     </div>
 
     <div><hr></div>
@@ -36,22 +34,42 @@
 
   </div>
 
-  <book-list *ngIf="books"
-             [books]="books"
-             [totalNbrBooks]="totalNbrBooks"
-             [pageSize]="pageSize"
-             (onLoadMoreBooks)="searchBooks($event)"
-             (onBookClicked)="goToDetailPage($event)">
-  </book-list>
+  <div *ngIf="books">
+    <div class="row ml-1">
+      <button class="back-button" mdbBtn type="button" mdbWavesEffect outline="true"
+              mdbTooltip="Terug naar het hoofdscherm" placement="right"
+              (click)="resetSearch()"><fa-icon icon="angle-double-left"></fa-icon>
+      </button>
+    </div>
+    <book-list *ngIf="books"
+               [books]="books"
+               [totalNbrBooks]="totalNbrBooks"
+               [pageSize]="pageSize"
+               (onLoadMoreBooks)="searchBooks($event)"
+               (onBookClicked)="goToDetailPage($event)">
+    </book-list>
+  </div>
 
   <jw-modal id="search-modal">
     <div *ngIf="isSearchModalActive">
-      <div class="jw-modal-title">Uitgebreid zoeken</div>
+      <div class="jw-modal-title">Zoeken</div>
       <div class="container">
+
+        <div class="mt-3 mb-3">
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="searchTitleOrAuthor" [(ngModel)]="whatToSearch" value="searchTitleOrAuthor" checked>
+            <label class="custom-control-label" for="searchTitleOrAuthor">Zoeken op titel of auteur</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="searchDescription" [(ngModel)]="whatToSearch" value="searchDescription">
+            <label class="custom-control-label" for="searchDescription">Zoeken in beschrijving</label>
+          </div>
+
+        </div>
 
         <div class="row">
           <div class="input-group search-group mt-3 ml-3 mr-3 mb-3">
-            <input [(ngModel)]="extendedSearchQuery" type="text" class="input-search" placeholder="Zoek op titel of auteur">
+            <input [(ngModel)]="extendedSearchQuery" type="text" class="input-search" placeholder="Zoeken naar...">
             <button (click)="resetSearchInput()" [disabled]="!extendedSearchQuery" class="extended-search-rb" type="text">
               <fa-icon icon="window-close"></fa-icon>
             </button>
@@ -61,6 +79,16 @@
         <div class="row">
           <div class="mt-3 ml-3 mb-3">
           <table class="search-table">
+            <tr>
+              <td class="col-left">Genre / Map:</td>
+              <td>
+                <select [(ngModel)]="searchGenre" class="browser-default custom-select">
+                  <option selected>-- Kies genre --</option>
+                  <option *ngFor="let genre of allGenres;" value={{genre.name}}>{{genre.name}}</option>
+                </select>
+              </td>
+            </tr>
+
             <tr>
               <td class="col-left">Categorie:</td>
               <td>

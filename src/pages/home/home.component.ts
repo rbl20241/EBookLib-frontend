@@ -27,8 +27,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // popup uitgebreid zoeken
   extendedSearchQuery: string;
+  searchGenre: string;
   searchCategory: string;
   searchExtension: string;
+  whatToSearch: string;
+  searchItems: string[] = ['Zoeken op titel of auteur', 'Zoeken in beschrijving']
 
   public allGenres = [];
   public allCategories = [];
@@ -43,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ngOnInit() {
       this.getAllGenres();
       this.getAllCategories();
+      this.whatToSearch = 'searchTitleOrAuthor';
     }
 
     ngOnDestroy(): void {
@@ -116,7 +120,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 //         return;
 //       }
       this.closeSearchDialog();
-      this.bookService.extendedSearchBooks(this.extendedSearchQuery, this.searchCategory, this.searchExtension, pageNum, this.pageSize)
+      this.bookService.extendedSearchBooks(this.whatToSearch, this.extendedSearchQuery, this.searchGenre, this.searchCategory, this.searchExtension, pageNum, this.pageSize)
         .pipe(takeUntil(this.componentDestroyed$))
         .subscribe(page => {
         this.books = page.content;

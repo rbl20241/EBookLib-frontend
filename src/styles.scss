@@ -153,7 +153,7 @@ jw-modal {
   .jw-modal {
     /* modal container fixed across whole screen */
     position: fixed;
-    top: 20%;
+    top: 10%;
     right: 0;
     bottom: 0;
     left: 30%;
@@ -174,7 +174,7 @@ jw-modal {
     }
     .jw-modal-font{
       font-family: Helvetica, sans-serif;
-      font-size: 25px;
+      font-size: 16px;
     }
 
   }
@@ -197,7 +197,7 @@ jw-modal {
 
   .jw-modal-title {
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: $library-main;
 
@@ -224,5 +224,43 @@ h4 {
   color: $library-main;
 }
 
+// .ng-reflect-mdb-tooltip {
+//    background: $library-background;
+//    color: $library-main;
+// }
+//
+// [data-md-tooltip] {
+//  position: relative;
+// }
+// [data-md-tooltip]:before {
+//    content: attr(data-md-tooltip);
+//    position: absolute;
+//    bottom: -15px;
+//    left: 150%;
+//    padding: 8px;
+//    transform: translateX(-50%) scale(0);
+//    transition: transform 0.3s ease-in-out;
+//    transform-origin: top;
+//    background: $library-background;
+//    color: $library-main;
+//    border-radius: 10px;
+//    border: solid $library-main 1px;
+//    font-size: 14px;
+//    font-family: Roboto,sans-serif;
+//    font-weight: 400;
+// }
+// [data-md-tooltip]:hover:before {
+//  transform: translateX(-50%) scale(1);
+// }
 
+.tp-radio-group {
+   display: inline-flex;
+   flex-direction: column;
+}
+.tp-radio-button {
+   margin: 5px;
+}
+.tp-selected-value {
+   margin: 15px 0;
+}
 
