@@ -26,11 +26,11 @@ export class BookService extends BaseService {
     return this.httpClient.get<Page>(this.booksUrl, {params: parms, headers: this.constructHeaders()});
   }
 
-  public getMyBooks(pageSize: number, pageNum: number): Observable<Page> {
-    const parms = new HttpParams().append('size', String(pageSize)).append( 'pageNo', String(pageNum));
-    const url = this.booksUrl + '/my-books';
-    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
-  }
+//   public getMyBooks(pageSize: number, pageNum: number): Observable<Page> {
+//     const parms = new HttpParams().append('size', String(pageSize)).append( 'pageNo', String(pageNum));
+//     const url = this.booksUrl + '/my-books';
+//     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
+//   }
 
   public updateDatabase(): Observable<string> {
     const url = this.booksUrl;
@@ -41,12 +41,6 @@ export class BookService extends BaseService {
     return this.httpClient.post<string>(this.booksUrl, book, {headers: this.constructHeaders()});
   }
 
-//   public deleteBook(bookOwnerId: number): Observable<string> {
-//     const parms = new HttpParams().append('bookOwnerId', String(bookOwnerId));
-//     const url = this.bookOwnerUrl + '/remove-owner';
-//     return this.httpClient.delete<string>(url, {params: parms, headers: this.constructHeaders()});
-//   }
-
   public getBooksForGenre(genre: string, pageSize: number, pageNum: number): Observable<Page> {
     const parms = new HttpParams()
       .append('genre', genre)
@@ -56,36 +50,12 @@ export class BookService extends BaseService {
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
 
-//   public getBooksForCategory(category: string, pageSize: number, pageNum: number): Observable<Page> {
-//     const parms = new HttpParams()
-//       .append('category', category)
-//       .append('size', String(pageSize))
-//       .append('pageNo', String(pageNum));
-//     const url = this.booksUrl + '/category';
-//     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
-//   }
-
-//   public updateBooks(): Observable<string> {
-//     const url = this.booksUrl + '/update';
-//     console.log(url);
-//     return this.httpClient.put<string>(url, {headers: this.constructHeaders()});
-//   }
-
   public updateBook(book: Book): Observable<string> {
     const url = this.booksUrl + '/update';
     return this.httpClient.put<string>(url, book, {headers: this.constructHeaders()});
   }
 
-  public searchBooksByTitleOrAuthor(query, pageNum, size): Observable<Page> {
-    const parms = new HttpParams()
-      .append('query', query)
-      .append('size', String(size))
-      .append('pageNo', String(pageNum));
-    const url = this.booksUrl + '/search';
-    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
-  }
-
-  public extendedSearchBooks(whatToSearch, query, genre, category, extension, pageNum, size): Observable<Page> {
+  public searchBooks(whatToSearch, query, genre, category, extension, pageNum, size): Observable<Page> {
     const parms = new HttpParams()
       .append('whatToSearch', whatToSearch)
       .append('query', query)
@@ -94,7 +64,7 @@ export class BookService extends BaseService {
       .append('extension', extension)
       .append('size', String(size))
       .append('pageNo', String(pageNum));
-    const url = this.booksUrl + '/extendedsearch';
+    const url = this.booksUrl + '/search';
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
 

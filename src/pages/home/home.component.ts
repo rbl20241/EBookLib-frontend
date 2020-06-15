@@ -23,15 +23,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   books: Book[];
   totalNbrBooks: number;
   pageSize = 10;
-  searchQuery: string;
 
-  // popup uitgebreid zoeken
-  extendedSearchQuery: string;
+  // popup zoeken
+  whatToSearch: string;
+  searchQuery: string;
   searchGenre: string;
   searchCategory: string;
   searchExtension: string;
-  whatToSearch: string;
-  searchItems: string[] = ['Zoeken op titel of auteur', 'Zoeken in beschrijving']
 
   public allGenres = [];
   public allCategories = [];
@@ -71,26 +69,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public showBookListBasedOnType(bookType: string) {
-      //this.router.navigateByUrl(`category/${bookType}`);
       this.router.navigateByUrl(`genre/${bookType}`);
     }
 
     public browseAllbooks() {
       this.router.navigateByUrl(`books`);
-    }
-
-    public searchBooks(pageNum) {
-      if (this.searchQuery.length === 0) {
-        this.resetSearch();
-        return;
-      }
-      this.bookService.searchBooksByTitleOrAuthor(this.searchQuery, pageNum, this.pageSize)
-        .pipe(takeUntil(this.componentDestroyed$))
-        .subscribe(page => {
-        this.books = page.content;
-        this.totalNbrBooks = page.totalElements;
-        // console.log(JSON.stringify(this.books));
-      });
     }
 
     public goToDetailPage(bookId: number) {
@@ -114,23 +97,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.modalService.close('search-modal');
   }
 
-    public extendedSearchBooks(pageNum) {
-//       if (this.extendedSearchQuery.length === 0) {
-//         this.resetSearch();
-//         return;
-//       }
+    public searchBooks(pageNum) {
+      if (this.searchQuery.length === 0) {
+        this.resetSearch();
+        return;
+      }
       this.closeSearchDialog();
-      this.bookService.extendedSearchBooks(this.whatToSearch, this.extendedSearchQuery, this.searchGenre, this.searchCategory, this.searchExtension, pageNum, this.pageSize)
+      this.bookService.searchBooks(this.whatToSearch, this.searchQuery, this.searchGenre, this.searchCategory, this.searchExtension, pageNum, this.pageSize)
         .pipe(takeUntil(this.componentDestroyed$))
         .subscribe(page => {
         this.books = page.content;
         this.totalNbrBooks = page.totalElements;
-        // console.log(JSON.stringify(this.books));
       });
     }
 
     public resetSearchInput() {
-      this.extendedSearchQuery = '';
+      this.searchQuery = '';
     }
 
 }

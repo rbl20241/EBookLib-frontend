@@ -69,8 +69,8 @@
 
         <div class="row">
           <div class="input-group search-group mt-3 ml-3 mr-3 mb-3">
-            <input [(ngModel)]="extendedSearchQuery" type="text" class="input-search" placeholder="Zoeken naar...">
-            <button (click)="resetSearchInput()" [disabled]="!extendedSearchQuery" class="extended-search-rb" type="text">
+            <input [(ngModel)]="searchQuery" type="text" class="input-search" placeholder="Zoeken naar...">
+            <button (click)="resetSearchInput()" [disabled]="!searchQuery" class="extended-search-rb" type="text">
               <fa-icon icon="window-close"></fa-icon>
             </button>
           </div>
@@ -119,7 +119,7 @@
       </div>
       <div class="divider"></div>
       <button class="half-width outline mr-2" mdbBtn mdbWavesEffect (click)="closeSearchDialog()">Annuleren<fa-icon icon="times-circle" class="ml-2"></fa-icon></button>
-      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="extendedSearchBooks(1)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
+      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="searchBooks(1)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
     </div>
   </jw-modal>
 

@@ -6,7 +6,6 @@ import { FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesom
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MyBooksComponent } from '../pages/my-books/my-books.component';
 import { BookListComponent } from '../pages/book-list/book-list.component';
 import { BookDetailComponent } from '../pages/book-detail/book-detail.component';
 import { LoginForm } from '../pages/login/login.component';
@@ -16,6 +15,7 @@ import { AllBooksComponent } from 'src/pages/all-books/all-books.component';
 import { AuthService } from 'src/shared/services/auth.service';
 import { HomeComponent } from 'src/pages/home/home.component';
 import { BookTypeComponent } from 'src/pages/book-type/book-type.component';
+import { BookSearchComponent } from 'src/pages/book-search/book-search.component';
 import { HttpErrorInterceptor } from 'src/shared/services/http-error.interceptor';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,12 +25,10 @@ import { ModalComponent } from '../pages/modal-windows/modal-window.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { RegisterComponent } from 'src/pages/register/register.component';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { SearchComponent } from 'src/pages/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MyBooksComponent,
     BookListComponent,
     BookDetailComponent,
     LoginForm,
@@ -39,9 +37,9 @@ import { SearchComponent } from 'src/pages/search/search.component';
     AllBooksComponent,
     HomeComponent,
     BookTypeComponent,
+    BookSearchComponent,
     RegisterComponent,
     ModalComponent,
-    SearchComponent
   ],
   imports: [
     ButtonsModule,

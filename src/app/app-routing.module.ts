@@ -8,17 +8,17 @@ import { SettingsComponent } from '../pages/settings/settings.component';
 import { BooksUpdateComponent } from '../pages/books-update/update.component';
 
 import { BookDetailComponent } from 'src/pages/book-detail/book-detail.component';
-/*import { AddEditBookComponent } from 'src/pages/add-edit-book/add-edit-bBook.component'; */
 import { AllBooksComponent } from 'src/pages/all-books/all-books.component';
 import { BookTypeComponent } from '../pages/book-type/book-type.component';
+import { BookSearchComponent } from '../pages/book-search/book-search.component';
 
 const routes: Routes = [
 { path: 'books', canActivate: [AuthGuardService], component: AllBooksComponent},
-/*{ path: 'book/edit/:id', canActivate: [AuthGuardService], component: AddEditBookComponent }, */
 { path: 'book/:id', canActivate: [AuthGuardService], component: BookDetailComponent},
 { path: 'login', component: LoginForm },
 { path: 'books/update', canActivate: [AuthGuardService], component: BooksUpdateComponent},
 { path: 'genre/:genreType', canActivate: [AuthGuardService], component: BookTypeComponent },
+{ path: 'search/:whatToSearch', canActivate: [AuthGuardService], component: BookSearchComponent },
 { path: 'settings', canActivate: [AuthGuardService], component: SettingsComponent },
 { path: 'register', component: RegisterComponent },
 { path: '', canActivate: [AuthGuardService], component: HomeComponent}
