@@ -1,0 +1,137 @@
+<div class="container image-shadow rename mt-4 pb-4" >
+  <form class="pt-2" [formGroup]="renameForm" (submit)="run()">
+    <p class="h4 mb-4">Hernoemen</p>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Locatie van boeken..." type="text" id="sourceMap" formControlName="sourceMap" class="form-control">
+      <label for="sourceMap">Bron:</label>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Locatie van Calibre..." type="text" id="destinationMap" formControlName="destinationMap" class="form-control">
+      <label for="destinationMap">Doel:</label>
+    </div>
+
+    <div><hr></div>
+
+    <table class="rename-table">
+      <tr>
+        <td span="3"><p class="labelview">Bron:</p></td>
+      </tr>
+      <tr>
+        <td class="col-left">Scheidingsteken Titel-Auteur</td>
+        <td class="col-center">:</td>
+        <td class="col-right">
+          <select formControlName="sourceTitleAuthorSeparator" class="browser-default custom-select">
+<!--            <option selected>{{sourceTitleAuthorSeparator.value}}</option>-->
+            <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+          </select>
+        </td>
+      <tr>
+        <td class="col-left">Scheidingsteken Achternaam-Voornaam</td>
+        <td class="col-center">:</td>
+      <td class="col-right">
+        <select formControlName="sourceAuthornameSeparator" class="browser-default custom-select">
+          <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
+          <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+        </select>
+      </td>
+      </tr>
+      <tr>
+        <td class="col-left">Format</td>
+        <td class="col-center">:</td>
+        <td class="col-right">
+          <select formControlName="sourceFormat" class="browser-default custom-select">
+            <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
+            <option *ngFor="let format of allFormats;" value={{format.name}}>{{format.value}}</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td span="3"><p class="labelview">Doel:</p></td>
+      </tr>
+      <tr>
+        <td class="col-left">Scheidingsteken Titel-Auteur</td>
+        <td class="col-center">:</td>
+        <td class="col-right">
+          <select formControlName="destTitleAuthorSeparator" class="browser-default custom-select">
+            <!--            <option selected>{{sourceTitleAuthorSeparator.value}}</option>-->
+            <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+          </select>
+        </td>
+      <tr>
+        <td class="col-left">Scheidingsteken Achternaam-Voornaam</td>
+        <td class="col-center">:</td>
+        <td class="col-right">
+          <select formControlName="destAuthornameSeparator" class="browser-default custom-select">
+            <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
+            <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="col-left">Format</td>
+        <td class="col-center">:</td>
+        <td class="col-right">
+          <select formControlName="destFormat" class="browser-default custom-select">
+            <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
+            <option *ngFor="let format of allFormats;" value={{format.name}}>{{format.value}}</option>
+          </select>
+        </td>
+      </tr>
+
+    </table>
+
+    <div><hr></div>
+
+
+    <!--    <div class="md-form">-->
+<!--      <input mdbInput placeholder="Kopieren naar..." type="text" id="copyTo" formControlName="copyTo" class="form-control">-->
+<!--      <label for="copyTo">Kopieren naar:</label>-->
+<!--    </div>-->
+
+<!--    <div class="md-form">-->
+<!--      <input mdbInput placeholder="Mailen naar..." type="text" id="mailTo" formControlName="mailTo" class="form-control">-->
+<!--      <label for="mailTo">Mailen naar:</label>-->
+<!--    </div>-->
+
+<!--    <p class="labelview">Mail-instellingen:</p>-->
+<!--    <table style="width: 100%">-->
+<!--      <colgroup>-->
+<!--        <col span="1" style="width: 50%;">-->
+<!--        <col span="1" style="width: 50%;">-->
+<!--      </colgroup>-->
+<!--      <tr>-->
+<!--        <td class="columns">-->
+<!--          <div class="md-form">-->
+<!--            <input mdbInput placeholder="Host..." type="text" id="host" formControlName="mailHost" class="form-control">-->
+<!--            <label for="host">Host:</label>-->
+<!--          </div>-->
+
+<!--          <div class="md-form">-->
+<!--            <input mdbInput placeholder="Port..." type="text" id="port" formControlName="mailPort" class="form-control">-->
+<!--            <label for="port">Port:</label>-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td class="columns">-->
+<!--          <div class="md-form">-->
+<!--            <input mdbInput placeholder="Afzender..." type="text" id="userName" formControlName="mailUserName" class="form-control">-->
+<!--            <label for="userName">Afzender:</label>-->
+<!--          </div>-->
+
+<!--          <div class="md-form">-->
+<!--            <input mdbInput placeholder="Wachtwoord..." type="password" id="password" formControlName="mailPassword" class="form-control">-->
+<!--            <label for="password">Wachtwoord:</label>-->
+<!--          </div>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--    </table>-->
+
+    <div class="row">
+      <button mdbBtn mdbWavesEffect class="half-width ml-3 outline" type="button" (click)="cancel()">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
+      <button mdbBtn mdbWavesEffect class="half-width mr-3" type="submit" [disabled]="renameForm.invalid">Hernoemen<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
+    </div>
+
+  </form>
+</div>

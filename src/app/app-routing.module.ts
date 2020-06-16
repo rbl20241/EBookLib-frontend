@@ -5,6 +5,7 @@ import { RegisterComponent } from '../pages/register/register.component';
 import { AuthGuardService } from './auth-guard.service';
 import { HomeComponent } from '../pages/home/home.component';
 import { SettingsComponent } from '../pages/settings/settings.component';
+import { RenameComponent } from '../pages/rename/rename.component';
 import { BooksUpdateComponent } from '../pages/books-update/update.component';
 
 import { BookDetailComponent } from 'src/pages/book-detail/book-detail.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
 { path: 'genre/:genreType', canActivate: [AuthGuardService], component: BookTypeComponent },
 { path: 'search/:whatToSearch/:query/:genre/:category/:extension', canActivate: [AuthGuardService], component: BookSearchComponent },
 { path: 'settings', canActivate: [AuthGuardService], component: SettingsComponent },
+{ path: 'rename', canActivate: [AuthGuardService], component: RenameComponent },
 { path: 'register', component: RegisterComponent },
 { path: '', canActivate: [AuthGuardService], component: HomeComponent}
 ];
