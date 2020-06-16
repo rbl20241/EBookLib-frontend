@@ -68,8 +68,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
 
-    public showBookListBasedOnType(bookType: string) {
-      this.router.navigateByUrl(`genre/${bookType}`);
+    public showBookListBasedOnGenre(genre: string) {
+      this.router.navigateByUrl(`genre/${genre}`);
+    }
+
+    public showSearchBookList(whatToSearch: string, query: string, genre: string, category: string, extension: string) {
+      this.router.navigateByUrl(`search/${whatToSearch}/${query}/${genre}/${category}/${extension}`);
     }
 
     public browseAllbooks() {

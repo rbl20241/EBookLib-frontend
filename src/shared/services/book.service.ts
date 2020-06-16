@@ -55,7 +55,7 @@ export class BookService extends BaseService {
     return this.httpClient.put<string>(url, book, {headers: this.constructHeaders()});
   }
 
-  public searchBooks(whatToSearch, query, genre, category, extension, pageNum, size): Observable<Page> {
+  public searchBooks(whatToSearch, query, genre, category, extension, size, pageNum): Observable<Page> {
     const parms = new HttpParams()
       .append('whatToSearch', whatToSearch)
       .append('query', query)

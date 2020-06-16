@@ -18,7 +18,7 @@ const routes: Routes = [
 { path: 'login', component: LoginForm },
 { path: 'books/update', canActivate: [AuthGuardService], component: BooksUpdateComponent},
 { path: 'genre/:genreType', canActivate: [AuthGuardService], component: BookTypeComponent },
-{ path: 'search/:whatToSearch', canActivate: [AuthGuardService], component: BookSearchComponent },
+{ path: 'search/:whatToSearch/:query/:genre/:category/:extension', canActivate: [AuthGuardService], component: BookSearchComponent },
 { path: 'settings', canActivate: [AuthGuardService], component: SettingsComponent },
 { path: 'register', component: RegisterComponent },
 { path: '', canActivate: [AuthGuardService], component: HomeComponent}

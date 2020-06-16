@@ -28,7 +28,7 @@
 
     <div class="row ml-3">
       <button class="quarter-width outline" mdbBtn type="button" mdbWavesEffect outline="true" *ngFor="let genre of allGenres;"
-              (click)="showBookListBasedOnType(genre.name)">{{ genre.name }}
+              (click)="showBookListBasedOnGenre(genre.name)">{{ genre.name }}
       </button>
     </div>
 
@@ -119,7 +119,8 @@
       </div>
       <div class="divider"></div>
       <button class="half-width outline mr-2" mdbBtn mdbWavesEffect (click)="closeSearchDialog()">Annuleren<fa-icon icon="times-circle" class="ml-2"></fa-icon></button>
-      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="searchBooks(1)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
+      <!--      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="searchBooks(1)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>-->
+      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="showSearchBookList(whatToSearch, searchQuery, searchGenre, searchCategory, searchExtension)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
     </div>
   </jw-modal>
 
