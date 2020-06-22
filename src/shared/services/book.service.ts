@@ -37,9 +37,9 @@ export class BookService extends BaseService {
     return this.httpClient.post<string>(url, null, {headers: this.constructHeaders()});
   }
 
-  public addBook(book: Book): Observable<string> {
-    return this.httpClient.post<string>(this.booksUrl, book, {headers: this.constructHeaders()});
-  }
+//   public addBook(book: Book): Observable<string> {
+//     return this.httpClient.post<string>(this.booksUrl, book, {headers: this.constructHeaders()});
+//   }
 
   public getBooksForGenre(genre: string, pageSize: number, pageNum: number): Observable<Page> {
     const parms = new HttpParams()

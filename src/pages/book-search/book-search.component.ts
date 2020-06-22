@@ -8,6 +8,7 @@ import {Subject} from 'rxjs';
 @Component({
   selector: 'book-search',
   templateUrl: 'book-search.component.html',
+  styleUrls: ['book-search.component.scss'],
   providers: [BookService]
 })
 
@@ -54,6 +55,17 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   public goToDetailPage(bookId: number) {
     // navigate to detailpage
     this.router.navigateByUrl('book/' + bookId);
+  }
+
+  public showValue(value: string): string {
+    if (value === 'searchTitleOrAuthor') {
+      return 'Titel en / of auteur';
+    }
+    else if (value === 'searchDescription') {
+      return 'Beschrijving';
+    } else {
+      return value === 'undefined' ? '-' : value;
+    }
   }
 
 }

@@ -63,3 +63,37 @@ select {
   width: 95%;
 }
 
+select.separator {
+  width: 20%;
+}
+
+button.rename-button {
+  width: 30%;
+  margin-button: .5rem;
+  border-radius: 10px;
+  color: white;
+  background-color: $library-main;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.rename-button:hover {
+  color: white;
+}
+
+button.rename-button.outline {
+  border: 2px solid $library-main;;
+  background-color: white;
+  color: $library-main;
+}
+
+button.rename-button.outline:hover {
+  border: 2px solid $library-main;;
+  background-color: $library-main;
+  color: white;
+}
+
+
+
+
+

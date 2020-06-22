@@ -3,13 +3,13 @@
     <p class="h4 mb-4">Hernoemen</p>
 
     <div class="md-form">
-      <input mdbInput placeholder="Locatie van boeken..." type="text" id="sourceMap" formControlName="sourceMap" class="form-control">
+      <input mdbInput placeholder="Bron..." type="text" id="sourceMap" formControlName="sourceMap" class="form-control">
       <label for="sourceMap">Bron:</label>
     </div>
 
     <div class="md-form">
-      <input mdbInput placeholder="Locatie van Calibre..." type="text" id="destinationMap" formControlName="destinationMap" class="form-control">
-      <label for="destinationMap">Doel:</label>
+      <input mdbInput placeholder="Doel..." type="text" id="destMap" formControlName="destMap" class="form-control">
+      <label for="destMap">Doel:</label>
     </div>
 
     <div><hr></div>
@@ -22,18 +22,18 @@
         <td class="col-left">Scheidingsteken Titel-Auteur</td>
         <td class="col-center">:</td>
         <td class="col-right">
-          <select formControlName="sourceTitleAuthorSeparator" class="browser-default custom-select">
+          <select formControlName="sourceTitleAuthorSeparator" class="browser-default custom-select separator">
 <!--            <option selected>{{sourceTitleAuthorSeparator.value}}</option>-->
-            <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+            <option *ngFor="let separator of allSeparators;" value={{separator.value}}>{{separator.viewValue}}</option>
           </select>
         </td>
       <tr>
         <td class="col-left">Scheidingsteken Achternaam-Voornaam</td>
         <td class="col-center">:</td>
       <td class="col-right">
-        <select formControlName="sourceAuthornameSeparator" class="browser-default custom-select">
+        <select formControlName="sourceAuthornameSeparator" class="browser-default custom-select separator">
           <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
-          <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+          <option *ngFor="let separator of allSeparators;" value={{separator.value}}>{{separator.viewValue}}</option>
         </select>
       </td>
       </tr>
@@ -43,7 +43,7 @@
         <td class="col-right">
           <select formControlName="sourceFormat" class="browser-default custom-select">
             <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
-            <option *ngFor="let format of allFormats;" value={{format.name}}>{{format.value}}</option>
+            <option *ngFor="let format of allFormats;" value={{format.value}}>{{format.viewValue}}</option>
           </select>
         </td>
       </tr>
@@ -55,18 +55,18 @@
         <td class="col-left">Scheidingsteken Titel-Auteur</td>
         <td class="col-center">:</td>
         <td class="col-right">
-          <select formControlName="destTitleAuthorSeparator" class="browser-default custom-select">
+          <select formControlName="destTitleAuthorSeparator" class="browser-default custom-select separator">
             <!--            <option selected>{{sourceTitleAuthorSeparator.value}}</option>-->
-            <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+            <option *ngFor="let separator of allSeparators;" value={{separator.value}}>{{separator.viewValue}}</option>
           </select>
         </td>
       <tr>
         <td class="col-left">Scheidingsteken Achternaam-Voornaam</td>
         <td class="col-center">:</td>
         <td class="col-right">
-          <select formControlName="destAuthornameSeparator" class="browser-default custom-select">
+          <select formControlName="destAuthornameSeparator" class="browser-default custom-select separator">
             <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
-            <option *ngFor="let separator of allSeparators;" value={{separator.name}}>{{separator.value}}</option>
+            <option *ngFor="let separator of allSeparators;" value={{separator.value}}>{{separator.viewValue}}</option>
           </select>
         </td>
       </tr>
@@ -76,7 +76,7 @@
         <td class="col-right">
           <select formControlName="destFormat" class="browser-default custom-select">
             <!--            <option selected>{{sourceTitleAuthorSeperator}}</option>-->
-            <option *ngFor="let format of allFormats;" value={{format.name}}>{{format.value}}</option>
+            <option *ngFor="let format of allFormats;" value={{format.value}}>{{format.viewValue}}</option>
           </select>
         </td>
       </tr>
@@ -129,8 +129,9 @@
 <!--    </table>-->
 
     <div class="row">
-      <button mdbBtn mdbWavesEffect class="half-width ml-3 outline" type="button" (click)="cancel()">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
-      <button mdbBtn mdbWavesEffect class="half-width mr-3" type="submit" [disabled]="renameForm.invalid">Hernoemen<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
+      <button mdbBtn mdbWavesEffect class="rename-button ml-3 outline" type="button" (click)="cancel()">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
+      <button mdbBtn mdbWavesEffect class="rename-button outline" type="button" (click)="saveRename()"[disabled]="renameForm.invalid">Opslaan<fa-icon icon="save" class="ml-3"></fa-icon></button>
+      <button mdbBtn mdbWavesEffect class="rename-button mr-3" type="submit" [disabled]="renameForm.invalid">Hernoemen<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
     </div>
 
   </form>
