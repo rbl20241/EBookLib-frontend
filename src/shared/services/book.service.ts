@@ -26,20 +26,10 @@ export class BookService extends BaseService {
     return this.httpClient.get<Page>(this.booksUrl, {params: parms, headers: this.constructHeaders()});
   }
 
-//   public getMyBooks(pageSize: number, pageNum: number): Observable<Page> {
-//     const parms = new HttpParams().append('size', String(pageSize)).append( 'pageNo', String(pageNum));
-//     const url = this.booksUrl + '/my-books';
-//     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
-//   }
-
   public updateDatabase(): Observable<string> {
     const url = this.booksUrl;
     return this.httpClient.post<string>(url, null, {headers: this.constructHeaders()});
   }
-
-//   public addBook(book: Book): Observable<string> {
-//     return this.httpClient.post<string>(this.booksUrl, book, {headers: this.constructHeaders()});
-//   }
 
   public getBooksForGenre(genre: string, pageSize: number, pageNum: number): Observable<Page> {
     const parms = new HttpParams()
@@ -98,11 +88,6 @@ export class BookService extends BaseService {
     const url = this.booksUrl + '/calibre';
     console.log(url + ' ' + id)
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
-/*
-    const parms = new HttpParams().append('bookId', String(id));
-    const url = this.booksUrl + '/calibre';
-    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
- */
   }
 
 }
