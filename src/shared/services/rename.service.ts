@@ -3,8 +3,6 @@ import { BaseService } from './base.service';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Separator } from '../../models/separator.model';
-import { Format } from '../../models/format.model';
 import { Rename } from '../../models/rename.model';
 
 @Injectable()

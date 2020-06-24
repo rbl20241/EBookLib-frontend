@@ -1,6 +1,3 @@
-import { Separator } from './separator.model';
-import { Format } from './format.model';
-
 export class Rename {
   id: number;
   userId: number;
