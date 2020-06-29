@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from 'src/models/book.model';
-import { Settings } from 'src/models/settings.model';
+import { UserSettings } from 'src/models/usersettings.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { BookService } from 'src/shared/services/book.service';
 import { UserService } from '../../shared/services/user.service';
-import { SettingsService } from '../../shared/services/settings.service';
+import { UserSettingsService } from '../../shared/services/usersettings.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -18,7 +18,7 @@ import * as JSZip from 'jszip';
     selector: 'app-book-detail',
     templateUrl: 'book-detail.component.html',
     styleUrls: ['book-detail.component.scss'],
-    providers: [ BookService, UserService, SettingsService ]
+    providers: [ BookService, UserService, UserSettingsService ]
 })
 export class BookDetailComponent implements OnInit, OnDestroy {
     componentDestroyed$: Subject<boolean> = new Subject();
@@ -39,11 +39,11 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
     constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location, private router: Router,
                 private toastr: ToastrService, private userService: UserService, private fb: FormBuilder,
-                private modalService: ModalService, private settingsService: SettingsService) { }
+                private modalService: ModalService, private userSettingsService: UserSettingsService) { }
 
 
     ngOnInit() {
-      this.loadSettings();
+      this.loadUserSettings();
       this.detailForm = this.fb.group({
         isbn: '',
         isRead: false,
@@ -82,13 +82,13 @@ export class BookDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    private loadSettings() {
+    private loadUserSettings() {
       this.userService.getCurrentUserId()
         .subscribe(userId => {
-          this.settingsService.getSettingsByUserId(userId)
-            .subscribe(settings => {
-              this.ctrls.copyTo.setValue(settings.copyTo);
-              this.ctrls.mailTo.setValue(settings.mailTo);
+          this.userSettingsService.getUserSettingsByUserId(userId)
+            .subscribe(userSettingsService => {
+              this.ctrls.copyTo.setValue(userSettingsService.copyTo);
+              this.ctrls.mailTo.setValue(userSettingsService.mailTo);
             });
         });
     }

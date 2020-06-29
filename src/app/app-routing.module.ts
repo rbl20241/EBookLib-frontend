@@ -4,7 +4,8 @@ import { LoginForm } from 'src/pages/login/login.component';
 import { RegisterComponent } from '../pages/register/register.component';
 import { AuthGuardService } from './auth-guard.service';
 import { HomeComponent } from '../pages/home/home.component';
-import { SettingsComponent } from '../pages/settings/settings.component';
+import { UserSettingsComponent } from '../pages/usersettings/usersettings.component';
+import { MainSettingsComponent } from '../pages/mainsettings/mainsettings.component';
 import { RenameComponent } from '../pages/rename/rename.component';
 import { BooksUpdateComponent } from '../pages/books-update/update.component';
 
@@ -20,7 +21,8 @@ const routes: Routes = [
 { path: 'books/update', canActivate: [AuthGuardService], component: BooksUpdateComponent},
 { path: 'genre/:genreType', canActivate: [AuthGuardService], component: BookTypeComponent },
 { path: 'search/:whatToSearch/:query/:genre/:category/:extension', canActivate: [AuthGuardService], component: BookSearchComponent },
-{ path: 'settings', canActivate: [AuthGuardService], component: SettingsComponent },
+{ path: 'usersettings', canActivate: [AuthGuardService], component: UserSettingsComponent },
+{ path: 'mainsettings', canActivate: [AuthGuardService], component: MainSettingsComponent },
 { path: 'rename', canActivate: [AuthGuardService], component: RenameComponent },
 { path: 'register', component: RegisterComponent },
 { path: '', canActivate: [AuthGuardService], component: HomeComponent}

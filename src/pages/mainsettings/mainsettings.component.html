@@ -1,0 +1,21 @@
+<div class="container image-shadow settings mt-4 pb-4" >
+  <form class="pt-2" [formGroup]="mainSettingsForm" (submit)="saveMainSettings()">
+    <p class="h4 mb-4">Algemene instellingen</p>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Locatie van boeken..." type="text" id="libraryMap" formControlName="libraryMap" class="form-control">
+      <label for="libraryMap">Locatie van de boeken:</label>
+    </div>
+
+    <div class="md-form">
+      <input mdbInput placeholder="Locatie van Calibre..." type="text" id="calibreCommand" formControlName="calibreCommand" class="form-control">
+      <label for="calibreCommand">Locatie van Calibre:</label>
+    </div>
+
+    <div class="row">
+      <button mdbBtn mdbWavesEffect class="half-width ml-3" type="submit" [disabled]="mainSettingsForm.invalid">Opslaan<fa-icon icon="save" class="ml-3"></fa-icon></button>
+      <button mdbBtn mdbWavesEffect class="half-width mr-3 outline" type="button" (click)="cancel()">Annuleer<fa-icon icon="times-circle" class="ml-3"></fa-icon></button>
+    </div>
+
+  </form>
+</div>

@@ -1,17 +1,4 @@
 <div class="container" id="lib-container">
-<!--  <div class="row">-->
-<!--    <div class="input-group search-group mt-2 ml-3 mr-3">-->
-<!--      <button (click)="resetSearch()" [disabled]="!books" class="search-lb" type="text">-->
-<!--        <fa-icon icon="arrow-left"></fa-icon>-->
-<!--      </button>-->
-<!--      <input (keyup.enter)="searchBooks(1)"-->
-<!--             [(ngModel)]="searchQuery" type="text" class="search-control" placeholder="Zoek op titel of auteur">-->
-<!--      <button (click)="searchBooks(1)" [disabled]="!searchQuery" class="search-rb" type="submit">-->
-<!--        <fa-icon icon="search"></fa-icon>-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </div>-->
-
   <div *ngIf="!books">
     <div class="row col-12 mt-2 ml-1 mr-2">
       <button (click)="browseAllbooks()" mdbBtn mdbWavesEffect type="button" block="true" class="home-width">Toon alle boeken<fa-icon icon="book" class="ml-3"></fa-icon></button>

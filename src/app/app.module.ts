@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 import { BookListComponent } from '../pages/book-list/book-list.component';
 import { BookDetailComponent } from '../pages/book-detail/book-detail.component';
 import { LoginForm } from '../pages/login/login.component';
-import { SettingsComponent } from 'src/pages/settings/settings.component';
+import { MainSettingsComponent } from 'src/pages/mainsettings/mainsettings.component';
+import { UserSettingsComponent } from 'src/pages/usersettings/usersettings.component';
 import { RenameComponent } from 'src/pages/rename/rename.component';
 import { BooksUpdateComponent } from 'src/pages/books-update/update.component';
 import { AllBooksComponent } from 'src/pages/all-books/all-books.component';
@@ -33,7 +34,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     BookListComponent,
     BookDetailComponent,
     LoginForm,
-    SettingsComponent,
+    MainSettingsComponent,
+    UserSettingsComponent,
     RenameComponent,
     BooksUpdateComponent,
     AllBooksComponent,

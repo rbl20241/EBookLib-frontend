@@ -1,9 +1,7 @@
-export class Settings {
+export class UserSettings {
   id: number;
   userId: number;
 
-  libraryMap: string;
-  calibreCommand; string;
   copyTo: string;
   mailTo: string;
 
