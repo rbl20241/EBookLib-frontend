@@ -9,8 +9,19 @@ $library-main: #336699;
 
 /* prevent labels to turn blue when cursor enters field */
 .md-form input:not([readonly]) + label {
-  color: #757575;
+  color: $library-main;
+  font-size: 16px;
   text-align: left;
+}
+
+.md-form.input-group .form-control {
+  padding-left: 0;
+  padding-top: 9.6px;
+  padding-bottom: 6.4px;
+}
+
+.md-form label.active {
+  color: red;
 }
 
 /* prevent background color to change when input field is autofilled */

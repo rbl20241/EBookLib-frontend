@@ -20,6 +20,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   errorMessage: string;
   userSettingsForm: FormGroup;
   newSettings = true;
+  visiblePassword = false;
 
   constructor(private userSettingsService: UserSettingsService, private toastr: ToastrService, private location: Location,
               private activatedRoute: ActivatedRoute, private userService: UserService) {
@@ -86,6 +87,14 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 
   cancel() {
     this.location.back();
+  }
+
+  showPassword() {
+    this.visiblePassword = true;
+  }
+
+  hidePassword() {
+    this.visiblePassword = false;
   }
 
   private showToaster() {

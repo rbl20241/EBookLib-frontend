@@ -46,6 +46,7 @@ export class LoginForm implements OnInit {
    * The RxJS take(1) operator automatically unsubscribes after the first execution.
    */
   login() {
+
     const user: User = this.loginForm.value as User;
     this.authService.doLogin(user);
     this.authService
