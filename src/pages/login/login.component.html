@@ -1,20 +1,58 @@
-<div class="container image-shadow login mt-4 pb-4" >
-  <form class="pt-2" [formGroup]="loginForm" (submit)="login()">
-    <p class="h4 mb-4">Aanmelden</p>
+<div class="container image-shadow login mt-4" >
+    <form [formGroup]="loginForm" (submit)="login()">
+      <div class="row">
+      <div class="col">
+        <div class="image">
+          <img src="./assets/images/shakespeare.jpg" tooltip="William Shakepeare">
+        </div>
+      </div>
+      <div class="col mr-4">
+      <h4 class="mt-3 header">Aanmelden</h4>
 
-    <div class="md-form invisible">
-      <input mdbInput placeholder="Password..." type="password" id="password" value="password" formControlName="password" class="form-control">
-      <label for="password">Wachtwoord:</label>
-    </div>
+      <div class="md-form invisible">
+        <input mdbInput placeholder="Password..." type="password" id="password" value="password" formControlName="password" class="form-control">
+        <label for="password">Wachtwoord:</label>
+      </div>
 
-    <div class="md-form">
-      <input mdbInput placeholder="Gebruikersnaam..." type="text" id="username" formControlName="username" class="form-control">
-      <label class="lib-label" for="username">Gebruikersnaam:</label>
-    </div>
+      <div class="md-form">
+        <input mdbInput placeholder="Gebruikersnaam..." type="text" id="username" formControlName="username" class="form-control">
+        <label class="lib-label" for="username">Gebruikersnaam:</label>
+      </div>
 
-    <button class="button" mdbBtn mdbWavesEffect type="submit" block="true" [disabled]="loginForm.invalid">Log in<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
-    <button class="button mt-3 outline" block="true" mdbBtn mdbWavesEffect id="registerButton"
-            routerLink="../register">Registreren<fa-icon icon="pencil-alt" class="ml-3"></fa-icon></button>
-  </form>
+      <button class="button" mdbBtn mdbWavesEffect type="submit" block="true" [disabled]="loginForm.invalid">Log in<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>
+      <button class="button mt-3 outline" block="true" mdbBtn mdbWavesEffect id="registerButton"
+              routerLink="../register">Registreren<fa-icon icon="pencil-alt" class="ml-3"></fa-icon></button>
+      </div>
+      </div>
+    </form>
+
+
+
+
+
+
+
 
 </div>
+
+
+<!--<div class="container image-shadow login mt-4 pb-4" >-->
+<!--  <form class="pt-2" [formGroup]="loginForm" (submit)="login()">-->
+<!--    <p class="h4 mb-4">Aanmelden</p>-->
+
+<!--    <div class="md-form invisible">-->
+<!--      <input mdbInput placeholder="Password..." type="password" id="password" value="password" formControlName="password" class="form-control">-->
+<!--      <label for="password">Wachtwoord:</label>-->
+<!--    </div>-->
+
+<!--    <div class="md-form">-->
+<!--      <input mdbInput placeholder="Gebruikersnaam..." type="text" id="username" formControlName="username" class="form-control">-->
+<!--      <label class="lib-label" for="username">Gebruikersnaam:</label>-->
+<!--    </div>-->
+
+<!--    <button class="button" mdbBtn mdbWavesEffect type="submit" block="true" [disabled]="loginForm.invalid">Log in<fa-icon icon="play-circle" class="ml-3"></fa-icon></button>-->
+<!--    <button class="button mt-3 outline" block="true" mdbBtn mdbWavesEffect id="registerButton"-->
+<!--            routerLink="../register">Registreren<fa-icon icon="pencil-alt" class="ml-3"></fa-icon></button>-->
+<!--  </form>-->
+
+<!--</div>-->
