@@ -7,6 +7,7 @@
       <th>Titel</th>
     </tr>
     </thead>
+
     <tbody>
     <tr style="cursor: pointer"  *ngFor="let book of books" (click)="goToDetailPage(book.id)">
       <td>{{ book.libraryMap }}</td>

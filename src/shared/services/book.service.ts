@@ -22,7 +22,9 @@ export class BookService extends BaseService {
 
   public getAllBooks(pageSize: number, pageNum: number): Observable<Page> {
     // httpParams is immutable therefore we need to chain the append method!
-    const parms = new HttpParams().append('size', String(pageSize)).append( 'pageNo', String(pageNum));
+    const parms = new HttpParams()
+      .append('size', String(pageSize))
+      .append('pageNo', String(pageNum));
     return this.httpClient.get<Page>(this.booksUrl, {params: parms, headers: this.constructHeaders()});
   }
 
