@@ -1,7 +1,6 @@
 $library-main: #336699;
 
 .login {
-//  text-align: center;
   max-width: 550px;
   background-color: white;
   border-radius: 10px;
@@ -16,11 +15,8 @@ col {
 
 /* prevent labels to turn blue when cursor enters field */
 .md-form input:not([readonly]) + label {
-  color: #757575;
   font-size: 18px;
   color: $library-main;
-//  font-style: italic;
-//  font-weight: bold;
   text-align: left;
 }
 

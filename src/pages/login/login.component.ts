@@ -30,14 +30,6 @@ export class LoginForm implements OnInit {
   get username() { return this.ctrls.username; }
   get password() { return this.ctrls.password }
 
-/*
-    ngAfterViewInit() {
-        const scriptElement = document.createElement('script');
-        scriptElement.type = 'text/javascript';
-        //scriptElement.src = 'assets/js/login-form.js';
-        this.elementRef.nativeElement.appendChild(scriptElement);
-    }
- */
 
   /**
    * When we press login a next time the observable will be created again while the previous one will still exist.
@@ -46,7 +38,6 @@ export class LoginForm implements OnInit {
    * The RxJS take(1) operator automatically unsubscribes after the first execution.
    */
   login() {
-
     const user: User = this.loginForm.value as User;
     this.authService.doLogin(user);
     this.authService
