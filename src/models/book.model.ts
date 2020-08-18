@@ -13,6 +13,7 @@ export class Book {
     libraryMap: string;
     publisher: string;
     extension: string;
+    language: string;
     description: string;
     isRead: string;
     identifiers: Identifier[];

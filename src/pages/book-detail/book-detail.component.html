@@ -24,6 +24,10 @@
                   <td class="left-col">Extensie:</td>
                   <td class="right-col">{{ book.extension.toUpperCase() }}</td>
                 </tr>
+                <tr class="col" *ngIf="hasValue(book.language)">
+                  <td class="left-col">Taal:</td>
+                  <td class="right-col">{{ book.language.toUpperCase() }}</td>
+                </tr>
                 <tr class="col" *ngIf="hasValue(book.isbn) && !editMode">
                   <td class="left-col">ISBN:</td>
                   <td class="right-col">{{ book.isbn }}</td>

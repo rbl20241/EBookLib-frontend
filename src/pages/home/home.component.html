@@ -99,6 +99,18 @@
               </td>
             </tr>
 
+            <tr>
+              <td class="col-left">Taal:</td>
+              <td>
+                <select [(ngModel)]="searchLanguage" class="browser-default custom-select">
+                  <option selected>-- Kies taal --</option>
+                  <option value="NL">Nederlands</option>
+                  <option value="ENG">Engels</option>
+                  <option value="UND">Onbekend</option>
+                </select>
+              </td>
+            </tr>
+
           </table>
           </div>
         </div>
@@ -107,7 +119,7 @@
       <div class="divider"></div>
       <button class="half-width outline mr-2" mdbBtn mdbWavesEffect (click)="closeSearchDialog()">Annuleren<fa-icon icon="times-circle" class="ml-2"></fa-icon></button>
       <!--      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="searchBooks(1)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>-->
-      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="showSearchBookList(whatToSearch, searchQuery, searchGenre, searchCategory, searchExtension)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
+      <button class="half-width outline" mdbBtn mdbWavesEffect (click)="showSearchBookList(whatToSearch, searchQuery, searchGenre, searchCategory, searchExtension, searchLanguage)">Zoeken<fa-icon icon="search" class="ml-2"></fa-icon></button>
     </div>
   </jw-modal>
 

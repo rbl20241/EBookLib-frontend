@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   searchGenre: string;
   searchCategory: string;
   searchExtension: string;
+  searchLanguage: string;
 
   public allGenres = [];
   public allCategories = [];
@@ -72,8 +73,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl(`genre/${genre}`);
     }
 
-    public showSearchBookList(whatToSearch: string, query: string, genre: string, category: string, extension: string) {
-      this.router.navigateByUrl(`search/${whatToSearch}/${query}/${genre}/${category}/${extension}`);
+    public showSearchBookList(whatToSearch: string, query: string, genre: string, category: string, extension: string, language: string) {
+      this.router.navigateByUrl(`search/${whatToSearch}/${query}/${genre}/${category}/${extension}/${language}`);
     }
 
     public browseAllbooks() {
@@ -107,7 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         return;
       }
       this.closeSearchDialog();
-      this.bookService.searchBooks(this.whatToSearch, this.searchQuery, this.searchGenre, this.searchCategory, this.searchExtension, pageNum, this.pageSize)
+      this.bookService.searchBooks(this.whatToSearch, this.searchQuery, this.searchGenre, this.searchCategory, this.searchExtension, this.searchLanguage, pageNum, this.pageSize)
         .pipe(takeUntil(this.componentDestroyed$))
         .subscribe(page => {
         this.books = page.content;

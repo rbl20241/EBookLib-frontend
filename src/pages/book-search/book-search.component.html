@@ -3,25 +3,25 @@
   <table class="search-table">
     <tr>
       <td class="col-left">Zoeken op:</td>
-      <td class="col-right">{{ showValue(whatToSearch) }}</td>
+      <td class="col-right arguments">{{ showValue(whatToSearch) }}</td>
       <td class="col-left">Zoekargument(en):</td>
-      <td span="3">{{ showValue(query) }}</td>
+      <td class="arguments" span="3">{{ showValue(query) }}</td>
     </tr>
     <tr>
       <td class="col-left">Genre:</td>
-      <td class="col-right">{{ showValue(genre) }}</td>
+      <td class="col-right arguments">{{ showValue(genre) }}</td>
       <td class="col-left">Categorie:</td>
-      <td class="col-right">{{ showValue(category) }}</td>
+      <td class="col-right arguments">{{ showValue(category) }}</td>
       <td class="col-left">Extensie:</td>
-      <td>{{ showValue(extension) }}</td>
+      <td class="arguments" >{{ showValue(extension) }}</td>
     </tr>
   </table>
 
-<book-list *ngIf="allBooks"
-           [books]="allBooks"
-           [totalNbrBooks]="totalNbrBooks"
-           [pageSize]="pageSize"
-           (onLoadMoreBooks)="loadBooksForPage($event)"
-           (onBookClicked)="goToDetailPage($event)">
-</book-list>
+  <book-list *ngIf="allBooks"
+             [books]="allBooks"
+             [totalNbrBooks]="totalNbrBooks"
+             [pageSize]="pageSize"
+             (onLoadMoreBooks)="loadBooksForPage($event)"
+             (onBookClicked)="goToDetailPage($event)">
+  </book-list>
 </div>

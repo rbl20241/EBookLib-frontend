@@ -20,6 +20,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   genre: string;
   category: string;
   extension: string;
+  language: string;
   totalNbrBooks: number;
   pageSize = 10;
 
@@ -34,6 +35,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
       this.genre = params.get('genre');
       this.category = params.get('category');
       this.extension = params.get('extension');
+      this.language = params.get('language');
       this.loadBooksForPage(1);
     });
   }
@@ -44,7 +46,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   }
 
   public loadBooksForPage(pageNbr: number) {
-    this.bookService.searchBooks(this.whatToSearch, this.query, this.genre, this.category, this.extension, this.pageSize, pageNbr)
+    this.bookService.searchBooks(this.whatToSearch, this.query, this.genre, this.category, this.extension, this.language, this.pageSize, pageNbr)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(page => {
       this.allBooks = page.content;

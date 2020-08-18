@@ -28,9 +28,11 @@ export class BookService extends BaseService {
     return this.httpClient.get<Page>(this.booksUrl, {params: parms, headers: this.constructHeaders()});
   }
 
-  public updateDatabase(): Observable<string> {
+  public updateDatabase(isUpdateWithApi: boolean): Observable<string> {
+    const params = new HttpParams()
+      .append('useApi', String(isUpdateWithApi));
     const url = this.booksUrl;
-    return this.httpClient.post<string>(url, null, {headers: this.constructHeaders()});
+    return this.httpClient.post<string>(url, params, {headers: this.constructHeaders()});
   }
 
   public getBooksForGenre(genre: string, pageSize: number, pageNum: number): Observable<Page> {
@@ -47,16 +49,18 @@ export class BookService extends BaseService {
     return this.httpClient.put<string>(url, book, {headers: this.constructHeaders()});
   }
 
-  public searchBooks(whatToSearch, query, genre, category, extension, size, pageNum): Observable<Page> {
+  public searchBooks(whatToSearch, query, genre, category, extension, language, size, pageNum): Observable<Page> {
     const parms = new HttpParams()
       .append('whatToSearch', whatToSearch)
       .append('query', query)
       .append('category', category)
       .append('genre', genre)
       .append('extension', extension)
+      .append('language', language)
       .append('size', String(size))
       .append('pageNo', String(pageNum));
     const url = this.booksUrl + '/search';
+    console.log(parms);
     return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
   }
 
