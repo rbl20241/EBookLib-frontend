@@ -17,7 +17,7 @@ export class RenameService extends BaseService {
   public getRenameByUserId(id: number): Observable<Rename> {
     const parms = new HttpParams().append('userId', String(id));
     const url = this.RENAME_URL + '/userId';
-    return this.httpClient.get<Rename>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Rename>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public constructRenameForm(): FormGroup {
@@ -37,11 +37,11 @@ export class RenameService extends BaseService {
 
   public run(rename: Rename) {
     const url = this.RENAME_URL + '/run';
-    return this.httpClient.post<string>(url, rename, {headers: this.constructHeaders()});
+    return this.httpClient.post<string>(url, rename, {headers: this.constructAuthHeaders()});
   }
 
   public saveRename(rename: Rename): Observable<string> {
     const url = this.RENAME_URL + '/save';
-    return this.httpClient.post<string>(url, rename, {headers: this.constructHeaders()});
+    return this.httpClient.post<string>(url, rename, {headers: this.constructAuthHeaders()});
   }
 }

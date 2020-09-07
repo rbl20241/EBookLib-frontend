@@ -17,7 +17,7 @@ export class BookService extends BaseService {
   public getBookById(id: number): Observable<Book> {
     const parms = new HttpParams().append('bookId', String(id));
     const url = this.booksUrl + '/bookid';
-    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public getAllBooks(pageSize: number, pageNum: number): Observable<Page> {
@@ -25,14 +25,14 @@ export class BookService extends BaseService {
     const parms = new HttpParams()
       .append('size', String(pageSize))
       .append('pageNo', String(pageNum));
-    return this.httpClient.get<Page>(this.booksUrl, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Page>(this.booksUrl, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public updateDatabase(isUpdateWithApi: boolean): Observable<string> {
     const params = new HttpParams()
       .append('useApi', String(isUpdateWithApi));
     const url = this.booksUrl;
-    return this.httpClient.post<string>(url, params, {headers: this.constructHeaders()});
+    return this.httpClient.post<string>(url, params, {headers: this.constructAuthHeaders()});
   }
 
   public getBooksForGenre(genre: string, pageSize: number, pageNum: number): Observable<Page> {
@@ -41,12 +41,12 @@ export class BookService extends BaseService {
       .append('size', String(pageSize))
       .append('pageNo', String(pageNum));
     const url = this.booksUrl + '/genre';
-    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public updateBook(book: Book): Observable<string> {
     const url = this.booksUrl + '/update';
-    return this.httpClient.put<string>(url, book, {headers: this.constructHeaders()});
+    return this.httpClient.put<string>(url, book, {headers: this.constructAuthHeaders()});
   }
 
   public searchBooks(whatToSearch, query, genre, category, extension, language, size, pageNum): Observable<Page> {
@@ -61,13 +61,13 @@ export class BookService extends BaseService {
       .append('pageNo', String(pageNum));
     const url = this.booksUrl + '/search';
     console.log(parms);
-    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Page>(url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public getBookByIsbn(isbn: string): Observable<Book> {
     const parms = new HttpParams().append('identifier', isbn);
     const url = this.BASE_URL + '/search/isbn';
-    return this.httpClient.get<Book>(url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Book>(url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public copyBook(id: number, copyTo: string) : Observable<Book> {
@@ -75,7 +75,7 @@ export class BookService extends BaseService {
       .append('bookId', String(id))
       .append('copyTo', String(copyTo));
     const url = this.booksUrl + '/copy';
-    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public sendBook(id: number, mailTo: string) : Observable<Book> {
@@ -84,7 +84,7 @@ export class BookService extends BaseService {
       .append('mailTo', String(mailTo));
     const url = this.booksUrl + '/mail';
     console.log(url + ' ' + id)
-    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public openCalibre(id: number): Observable<Book> {
@@ -93,7 +93,7 @@ export class BookService extends BaseService {
       .append('mailTo', String('rene.ordina@gmail.com'));
     const url = this.booksUrl + '/calibre';
     console.log(url + ' ' + id)
-    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
 }

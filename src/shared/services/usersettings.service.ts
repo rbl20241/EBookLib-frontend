@@ -17,7 +17,7 @@ export class UserSettingsService extends BaseService {
   public getSettingsById(id: number): Observable<UserSettings> {
     const parms = new HttpParams().append('usersettingsId', String(id));
     const url = this.USERSETTINGS_URL + '/usersettingsid';
-    return this.httpClient.get<UserSettings>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<UserSettings>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
   public constructUserSettingsForm(): FormGroup {
@@ -40,22 +40,22 @@ export class UserSettingsService extends BaseService {
   }
 
   public addUserSettings(userSettings: UserSettings): Observable<string> {
-    return this.httpClient.post<string>(this.USERSETTINGS_URL, userSettings, {headers: this.constructHeaders()});
+    return this.httpClient.post<string>(this.USERSETTINGS_URL, userSettings, {headers: this.constructAuthHeaders()});
   }
 
   public getUserSettings() {
-    return this.httpClient.get<1>(this.USERSETTINGS_URL, {headers: this.constructHeaders()});
+    return this.httpClient.get<1>(this.USERSETTINGS_URL, {headers: this.constructAuthHeaders()});
   }
 
   public updateUserSettings(userSettings: UserSettings): Observable<string> {
     const url = this.USERSETTINGS_URL + '/update';
-    return this.httpClient.put<string>(url, userSettings, {headers: this.constructHeaders()});
+    return this.httpClient.put<string>(url, userSettings, {headers: this.constructAuthHeaders()});
   }
 
   public getUserSettingsByUserId(id: number): Observable<UserSettings> {
     const parms = new HttpParams().append('userId', String(id));
     const url = this.USERSETTINGS_URL + '/userId';
-    return this.httpClient.get<UserSettings>( url, {params: parms, headers: this.constructHeaders()});
+    return this.httpClient.get<UserSettings>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
 

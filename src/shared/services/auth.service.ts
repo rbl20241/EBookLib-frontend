@@ -8,7 +8,7 @@ import { User } from '../../models/user.model';
 @Injectable()
 export class AuthService extends BaseService {
     public loginStatusChanged: EventEmitter<boolean> = new EventEmitter();
-    private oauthBasicHeader = 'Basic TGlicmFyeVNoYXJpbmdBcHA6U3VwZXJTZWNyZXRQYXNzd29yZA==';
+    // private oauthBasicHeader = 'Basic TGlicmFyeVNoYXJpbmdBcHA6U3VwZXJTZWNyZXRQYXNzd29yZA==';
 
     private storageNameToken = 'osd:library:auth:token';
     private storageNameExpiryDate = 'osd:library:expired:at';
@@ -20,9 +20,9 @@ export class AuthService extends BaseService {
 
     public doLogin(user: User): void {
         this.retrieveAccessToken(user.username, user.password).subscribe(response => {
-            console.log(JSON.stringify(response));
-            localStorage.setItem(this.storageNameToken, response.access_token);
-            localStorage.setItem(this.storageNameExpiryDate, Date.now() + response.expires_in + '');
+            // console.log(JSON.stringify(response));
+            localStorage.setItem(this.storageNameToken, response.accessToken);
+            localStorage.setItem(this.storageNameExpiryDate, Date.now() + response.tokenExpirationMsec + '');
 
             this.loginStatusChanged.emit(true);
         }, error => {
@@ -31,11 +31,11 @@ export class AuthService extends BaseService {
         });
     }
 
-      public logout(): void {
-        const url = this.BASE_URL + '/users/logout';
-        this.httpClient.post<any>(url, '', {headers: this.constructHeaders()});
-        this.doLogout();
-      }
+    public logout(): void {
+      const url = this.BASE_URL + '/users/logout';
+      this.httpClient.post<any>(url, '', {headers: this.constructJsonHeaders()});
+      this.doLogout();
+    }
 
     public doLogout(): boolean {
         localStorage.removeItem(this.storageNameToken);
@@ -61,13 +61,9 @@ export class AuthService extends BaseService {
     }
 
     private retrieveAccessToken(username: string, password: string): Observable<Authorization> {
-       const body = `username=${username}&password=${password}&grant_type=password&scope=read%20write`;
-        const contentType = `application/x-www-form-urlencoded`;
-        const url = this.BASE_URL + '/oauth/token';
-        let headers: HttpHeaders = new HttpHeaders();
-        headers = headers.append('Content-Type', contentType);
-        headers = headers.append('Authorization', this.oauthBasicHeader);
+       const body = JSON.stringify({username: `${username}`, password: `${password}`});
+       const url = this.BASE_URL + '/auth/login';
 
-        return this.httpClient.post<Authorization>(url, body, {headers});
+       return this.httpClient.post<Authorization>(url, body, {headers: this.constructJsonHeaders()});
     }
 }

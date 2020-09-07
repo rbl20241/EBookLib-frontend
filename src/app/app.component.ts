@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  providers: [AuthService],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -35,7 +34,7 @@ export class AppComponent implements OnInit{
   }
 
   public logout() {
-    this.authService.logout();
+    this.authService.doLogout();
     this.router.navigateByUrl('login');
   }
 }

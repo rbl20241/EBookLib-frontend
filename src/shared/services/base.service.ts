@@ -6,16 +6,23 @@ export class BaseService {
 
     constructor() {}
 
-    public constructHeaders(): HttpHeaders {
+    public constructAuthHeaders(): HttpHeaders {
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.set('Authorization', 'Bearer ' + localStorage.getItem('osd:library:auth:token'));
         return headers;
     }
 
-  public constructAddUserHeaders(): HttpHeaders {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return headers;
-  }
+    public constructAuthJsonHeaders(): HttpHeaders {
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.set('Authorization', 'Bearer ' + localStorage.getItem('osd:library:auth:token'));
+        headers = headers.append('Content-Type', 'application/json');
+        return headers;
+    }
+
+    public constructJsonHeaders(): HttpHeaders {
+      let headers: HttpHeaders = new HttpHeaders();
+      headers = headers.set('Content-Type', 'application/json');
+      return headers;
+    }
 
 }

@@ -14,7 +14,7 @@ export class GenreService extends BaseService {
 
   public getGenres(): Observable<string[]> {
     const url = this.genresUrl;
-    return this.httpClient.get<string[]>(url, {headers: this.constructHeaders()});
+    return this.httpClient.get<string[]>(url, {headers: this.constructAuthHeaders()});
   }
 
 }

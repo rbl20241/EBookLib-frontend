@@ -23,15 +23,15 @@ export class MainSettingsService extends BaseService {
   }
 
   public saveMainSettings(mainSettings: MainSettings): Observable<string> {
-    return this.httpClient.post<string>(this.MAINSETTINGS_URL, mainSettings, {headers: this.constructHeaders()});
+    return this.httpClient.post<string>(this.MAINSETTINGS_URL, mainSettings, {headers: this.constructAuthHeaders()});
   }
 
   public getMainSettings(): Observable<MainSettings> {
-    return this.httpClient.get<MainSettings>(this.MAINSETTINGS_URL, {headers: this.constructHeaders()});
+    return this.httpClient.get<MainSettings>(this.MAINSETTINGS_URL, {headers: this.constructAuthHeaders()});
   }
 
   public updateMainSettings(mainSettings: MainSettings): Observable<string> {
     const url = this.MAINSETTINGS_URL + '/update';
-    return this.httpClient.put<string>(url, mainSettings, {headers: this.constructHeaders()});
+    return this.httpClient.put<string>(url, mainSettings, {headers: this.constructAuthHeaders()});
   }
 }

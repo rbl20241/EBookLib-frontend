@@ -14,7 +14,7 @@ export class CategoryService extends BaseService {
 
   public getCategories(): Observable<string[]> {
     const url = this.categoriesUrl;
-    return this.httpClient.get<string[]>(url, {headers: this.constructHeaders()});
+    return this.httpClient.get<string[]>(url, {headers: this.constructAuthHeaders()});
   }
 
 }
