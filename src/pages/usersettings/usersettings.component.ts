@@ -24,6 +24,9 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 
   constructor(private userSettingsService: UserSettingsService, private toastr: ToastrService, private location: Location,
               private activatedRoute: ActivatedRoute, private userService: UserService) {
+
+    this.errorMessage = '';
+    this.userSettingsForm = FormGroup.prototype;
   }
 
   ngOnDestroy(): void {
@@ -45,12 +48,12 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 
   // convenience getters for easy access to form fields
   get ctrls() { return this.userSettingsForm.controls; }
-  get copyTo() { return this.ctrls.copyTo }
-  get mailTo() { return this.ctrls.mailTo }
-  get mailHost() { return this.ctrls.mailHost }
-  get mailPort() { return this.ctrls.mailPort }
-  get mailUserName() { return this.ctrls.mailUserName }
-  get mailPassword() { return this.ctrls.mailPassword }
+  get copyTo() { return this.ctrls.copyTo; }
+  get mailTo() { return this.ctrls.mailTo; }
+  get mailHost() { return this.ctrls.mailHost; }
+  get mailPort() { return this.ctrls.mailPort; }
+  get mailUserName() { return this.ctrls.mailUserName; }
+  get mailPassword() { return this.ctrls.mailPassword; }
 
   public saveUserSettings() {
     const userSettings: UserSettings = this.userSettingsForm.value as UserSettings;
@@ -58,30 +61,30 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     if (this.newSettings) {
       this.userSettingsService.addUserSettings(userSettings)
         .pipe(take(1))
-        .subscribe(
-        response => {
-          this.showToaster();
-          this.location.back();
-      },
-      error => {
-          console.log(error);
-          this.errorMessage = error.message;
-        }
-      );
+        .subscribe({
+          next: response => {
+            this.showToaster();
+            this.location.back();
+          },
+          error: error => {
+            console.log(error);
+            this.errorMessage = error.message;
+          }
+        });
     }
     else {
       this.userSettingsService.updateUserSettings(userSettings)
         .pipe(take(1))
-        .subscribe(
-        response => {
-        this.showToaster();
-        this.location.back();
-      },
-      error => {
-          console.log(error);
-          this.errorMessage = error.message;
-        }
-      );
+        .subscribe({
+          next: response => {
+            this.showToaster();
+            this.location.back();
+          },
+          error: error => {
+            console.log(error);
+            this.errorMessage = error.message;
+          }
+        });
     }
   }
 

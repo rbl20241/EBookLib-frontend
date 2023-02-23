@@ -23,10 +23,11 @@
         <td class="col-center">:</td>
         <td class="col-right">
           <select formControlName="sourceTitleAuthorSeparator" class="browser-default custom-select separator">
-<!--            <option selected>{{sourceTitleAuthorSeparator.value}}</option>-->
+            <!--            <option selected>{{sourceTitleAuthorSeparator.value}}</option>-->
             <option *ngFor="let separator of allSeparators;" value={{separator.value}}>{{separator.viewValue}}</option>
           </select>
         </td>
+      </tr>
       <tr>
         <td class="col-left">Scheidingsteken Achternaam-Voornaam</td>
         <td class="col-center">:</td>
@@ -60,6 +61,7 @@
             <option *ngFor="let separator of allSeparators;" value={{separator.value}}>{{separator.viewValue}}</option>
           </select>
         </td>
+      </tr>
       <tr>
         <td class="col-left">Scheidingsteken Achternaam-Voornaam</td>
         <td class="col-center">:</td>

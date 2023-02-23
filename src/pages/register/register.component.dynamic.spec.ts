@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './register.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
@@ -14,7 +14,7 @@ describe('RegisterComponent', () => {
 
   // let userServiceSpy: jasmine.SpyObj<UserService>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     // const spy = jasmine.createSpyObj('UserService', ['addUser']);
 
     TestBed.configureTestingModule({

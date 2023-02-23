@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { BookService } from 'src/shared/services/book.service';
 import {Book} from '../../models/book.model';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {take, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
@@ -18,14 +18,21 @@ export class BookTypeComponent implements OnInit, OnDestroy {
   totalNbrBooks: number;
   pageSize = 10;
 
-  constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,  private router: Router) { }
+  constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,  private router: Router) {
+    this.allBooks = [new Book()];
+    this.genre = '';
+    this.totalNbrBooks = 0;
+  }
 
   ngOnInit() {
     this.activatedRoute.paramMap
       .pipe(take(1))
       .subscribe(params => {
-      this.genre = params.get('genreType');
-      this.loadBooksForPage(1);
+        const tmpGenre = params.get('genreType');
+        if (typeof tmpGenre === 'string') {
+          this.genre = tmpGenre;
+        }
+        this.loadBooksForPage(1);
     });
   }
 

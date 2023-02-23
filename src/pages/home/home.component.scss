@@ -7,7 +7,7 @@ hr {
 
 button.home-width {
   width: 48%;
-  margin-button: .5rem;
+  margin-bottom: .5rem;
 }
 
 button.home-width {
@@ -55,7 +55,7 @@ input.input-search {
 select {
   border: 1px solid $library-main;
   border-radius: 10px;
-  align: center;
+  text-align: center;
   width: 95%;
 }
 
@@ -78,7 +78,7 @@ select {
 
 .back-button {
   color: $library-main;
-  align: left;
+  text-align: left;
 }
 
 

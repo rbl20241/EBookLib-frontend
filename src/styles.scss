@@ -70,7 +70,7 @@ input.search-control {
   border-top: 1px solid $library-main;
   border-left: none;
   border-right: none;
-  align: center;
+  text-align: center;
   width: 100%;
 
 }
@@ -81,12 +81,12 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 button.half-width {
   width: 45%;
-  margin-button: .5rem;
+  margin-bottom: .5rem;
 }
 
 button.quarter-width {
   width: 23%;
-  margin-button: .5rem;
+  margin-bottom: .5rem;
 }
 
 button.detail-width {
@@ -209,10 +209,7 @@ body.jw-modal-open {
 
 hr {
   display: block;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1em auto;
   border-style: inset;
   border-width: 2px;
   color: $library-main;

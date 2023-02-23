@@ -16,11 +16,14 @@ import { take } from 'rxjs/operators';
 
 export class BooksUpdateComponent implements OnInit, AfterViewInit {
   updateForm: FormGroup;
-  //isUpdateWithApi: boolean;
+  // isUpdateWithApi: boolean;
   isBusy = false;
 
-  constructor(private updateService: UpdateService, private elementRef: ElementRef, private bookService: BookService, private router: Router,
-    private location: Location, private toastr: ToastrService) { }
+  constructor(private updateService: UpdateService, private elementRef: ElementRef,
+              private bookService: BookService, private router: Router,
+              private location: Location, private toastr: ToastrService) {
+    this.updateForm = FormGroup.prototype;
+  }
 
   get ctrls() { return this.updateForm.controls; }
   get isUpdateWithApi() { return this.ctrls.isUpdateWithApi; }

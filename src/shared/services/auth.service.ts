@@ -19,20 +19,22 @@ export class AuthService extends BaseService {
     }
 
     public doLogin(user: User): void {
-        this.retrieveAccessToken(user.username, user.password).subscribe(response => {
+        this.retrieveAccessToken(user.username, user.password).subscribe({
+          next: response => {
             // console.log(JSON.stringify(response));
             localStorage.setItem(this.storageNameToken, response.accessToken);
             localStorage.setItem(this.storageNameExpiryDate, Date.now() + response.tokenExpirationMsec + '');
-
             this.loginStatusChanged.emit(true);
-        }, error => {
+          },
+          error: error => {
             console.log('Foutmelding: ' + JSON.stringify(error));
             this.loginStatusChanged.emit(false);
+          }
         });
     }
 
     public logout(): void {
-      const url = this.BASE_URL + '/users/logout';
+      const url = this.BASE_URL + '/auth/logout';
       this.httpClient.post<any>(url, '', {headers: this.constructJsonHeaders()});
       this.doLogout();
     }
@@ -46,10 +48,13 @@ export class AuthService extends BaseService {
 
     public isLoggedIn(): boolean {
         if (localStorage.getItem(this.storageNameToken)) {
-            if (this.isExpired(+localStorage.getItem(this.storageNameExpiryDate))) {
+            const tmp = localStorage.getItem(this.storageNameExpiryDate);
+            if (tmp !== null) {
+              if (this.isExpired(+tmp)) {
                 // if token is expired, force a re-login by removing cached token
                 this.doLogout();
                 return false;
+              }
             }
             return true;
         }
@@ -62,7 +67,7 @@ export class AuthService extends BaseService {
 
     private retrieveAccessToken(username: string, password: string): Observable<Authorization> {
        const body = JSON.stringify({username: `${username}`, password: `${password}`});
-       const url = this.BASE_URL + '/auth/login';
+       const url = this.BASE_URL + '/auth/signin';
 
        return this.httpClient.post<Authorization>(url, body, {headers: this.constructJsonHeaders()});
     }

@@ -10,11 +10,13 @@ import { Observable } from 'rxjs';
 })
 
 export class AppComponent implements OnInit{
+
+  static userName: string;
   title = 'EBookLibrary';
   loginText: string;
-  static userName: string;
 
   constructor(private authService: AuthService, private router: Router) {
+    this.loginText = 'Login';
   }
 
   ngOnInit() {
@@ -29,13 +31,13 @@ export class AppComponent implements OnInit{
     return this.loginText;
   }
 
-  public replaceLoginText(name) {
+  public replaceLoginText(name: string) {
     AppComponent.userName = name;
   }
 
   public logout() {
     this.authService.doLogout();
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('auth/signin');
   }
 }
 

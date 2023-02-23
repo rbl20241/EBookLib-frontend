@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class GenreService extends BaseService {
 
-  private genresUrl = this.BASE_URL + '/genres/';
+  private genresUrl = this.BASE_URL + '/genres';
 
   constructor(private httpClient: HttpClient) {
     super();

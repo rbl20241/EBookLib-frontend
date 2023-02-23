@@ -10,25 +10,25 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(tap(() => {
-      },
-      (err: any) => {
+    return next.handle(request).pipe(tap({
+      next: () => {},
+      error: (err: any) => {
         if (err instanceof HttpErrorResponse) {
           this.handleError(err);
         }
-      }));
+      }}));
   }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      return throwError(error.error.message);
+      return throwError(() => new Error(error.error.message));
     }
 
     // server-side error
     if (error.error.error === 'invalid_token') {
       alert('De sessie is verlopen. Log opnieuw in!');
       this.authService.doLogout();
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/auth/signin');
     }
 
     return throwError(error.error.description);

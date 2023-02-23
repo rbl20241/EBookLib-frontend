@@ -24,7 +24,7 @@ export class UserService extends BaseService {
       email: `${user.email}`,
       password: `${user.password}`
     });
-    const url = `/auth/register`;
+    const url = `/auth/signup`;
     return this.httpClient.post<string>(this.BASE_URL + url, body, {headers: this.constructJsonHeaders()});
   }
 

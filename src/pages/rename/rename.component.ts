@@ -45,6 +45,9 @@ export class RenameComponent implements OnInit, OnDestroy {
 
   constructor(private renameService: RenameService, private userService: UserService, private toastr: ToastrService,
               private location: Location, private activatedRoute: ActivatedRoute) {
+
+    this.errorMessage = '';
+    this.renameForm = FormGroup.prototype;
   }
 
   ngOnInit() {
@@ -79,16 +82,16 @@ export class RenameComponent implements OnInit, OnDestroy {
     // post won't execute without subscribe. After calling succesfully, go back to last page
     this.renameService.run(rename)
       .pipe(take(1))
-      .subscribe(
-      response => {
-        this.showToaster('R');
-        this.location.back();
-    },
-    error => {
-        console.log(error);
-        this.errorMessage = error.message;
-      }
-    );
+      .subscribe({
+        next: response => {
+          this.showToaster('R');
+          this.location.back();
+        },
+        error: error => {
+          console.log(error);
+          this.errorMessage = error.message;
+        }
+      });
   }
 
   cancel() {
@@ -99,15 +102,15 @@ export class RenameComponent implements OnInit, OnDestroy {
     const rename: Rename = this.renameForm.value as Rename;
     this.renameService.saveRename(rename)
       .pipe(take(1))
-      .subscribe(
-        response => {
+      .subscribe({
+        next: response => {
           this.showToaster('S');
         },
-        error => {
+        error: error => {
           console.log(error);
           this.errorMessage = error.message;
         }
-      );
+      });
   }
 
   private showToaster(action: string) {

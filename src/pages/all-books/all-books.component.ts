@@ -14,7 +14,10 @@ export class AllBooksComponent implements OnInit {
     totalNbrBooks: number;
     pageSize = 10;
 
-    constructor(private bookService: BookService, private router: Router) { }
+    constructor(private bookService: BookService, private router: Router) {
+      this.allBooks = [new Book()];
+      this.totalNbrBooks = 0;
+    }
 
     ngOnInit() {
         this.loadBooksForPage(1);

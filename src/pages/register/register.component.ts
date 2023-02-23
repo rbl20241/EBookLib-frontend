@@ -21,8 +21,12 @@ export class RegisterComponent implements OnInit {
   errMessage = false;
   registerForm: FormGroup;
 
-  constructor(private registerService: RegisterService, private userService: UserService, private authService: AuthService,
-              private toastr: ToastrService, private router: Router, private location: Location, private appComponent: AppComponent) {
+  constructor(private registerService: RegisterService, private userService: UserService,
+              private authService: AuthService, private toastr: ToastrService, private router: Router,
+              private location: Location, private appComponent: AppComponent) {
+
+    this.errorMessage = '';
+    this.registerForm = FormGroup.prototype;
   }
 
   ngOnInit() {
@@ -33,23 +37,23 @@ export class RegisterComponent implements OnInit {
   get ctrls() { return this.registerForm.controls; }
   get email() { return this.ctrls.email; }
   get username() { return this.ctrls.username; }
-  get password() { return this.ctrls.password }
+  get password() { return this.ctrls.password; }
 
   public doRegister() {
     const user: User = this.registerForm.value as User;
     // post won't execute without subscribe. After calling succesfully, go back to last page
     this.userService.addUser(user)
       .pipe(take(1))
-      .subscribe(
-      response => {
-        this.showToaster();
-        this.login(user);
-    },
-    error => {
-        this.errorMessage = error.error.message;
-        this.username.setErrors({inuse: true});
-      }
-    );
+      .subscribe({
+        next: response => {
+          this.showToaster();
+          this.login(user);
+        },
+        error: error => {
+          this.errorMessage = error.error.message;
+          this.username.setErrors({inuse: true});
+        }
+      });
   }
 
   cancel() {

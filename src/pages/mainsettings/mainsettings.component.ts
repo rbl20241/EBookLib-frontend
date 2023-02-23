@@ -22,6 +22,8 @@ export class MainSettingsComponent implements OnInit, OnDestroy {
 
   constructor(private mainSettingsService: MainSettingsService, private toastr: ToastrService, private location: Location,
               private activatedRoute: ActivatedRoute) {
+    this.errorMessage = '';
+    this.mainSettingsForm = FormGroup.prototype;
   }
 
   ngOnDestroy(): void {
@@ -42,37 +44,39 @@ export class MainSettingsComponent implements OnInit, OnDestroy {
   get ctrls() { return this.mainSettingsForm.controls; }
   get libraryMap() { return this.ctrls.libraryMap; }
   get calibreCommand() { return this.ctrls.calibreCommand; }
+  get tempMap() { return this.ctrls.tempMap; }
 
   public saveMainSettings() {
+    console.log('saveMainSettings');
     const mainSettings: MainSettings = this.mainSettingsForm.value as MainSettings;
     // post won't execute without subscribe. After calling succesfully, go back to last page
     if (this.newSettings) {
       this.mainSettingsService.saveMainSettings(mainSettings)
         .pipe(take(1))
-        .subscribe(
-        response => {
-          this.showToaster();
-          this.location.back();
-      },
-      error => {
-          console.log(error);
-          this.errorMessage = error.message;
-        }
-      );
+        .subscribe({
+          next: response => {
+            this.showToaster();
+            this.location.back();
+          },
+          error: error => {
+            console.log(error);
+            this.errorMessage = error.message;
+          }
+        });
     }
     else {
       this.mainSettingsService.updateMainSettings(mainSettings)
         .pipe(take(1))
-        .subscribe(
-        response => {
-        this.showToaster();
-        this.location.back();
-      },
-      error => {
-          console.log(error);
-          this.errorMessage = error.message;
-        }
-      );
+        .subscribe({
+          next: response => {
+            this.showToaster();
+            this.location.back();
+          },
+          error: error => {
+            console.log(error);
+            this.errorMessage = error.message;
+          }
+        });
     }
   }
 
@@ -89,6 +93,7 @@ export class MainSettingsComponent implements OnInit, OnDestroy {
       this.ctrls.id.setValue(mainSettings.id);
       this.ctrls.libraryMap.setValue(mainSettings.libraryMap);
       this.ctrls.calibreCommand.setValue(mainSettings.calibreCommand);
+      this.ctrls.tempMap.setValue(mainSettings.tempMap);
     }
   }
 }

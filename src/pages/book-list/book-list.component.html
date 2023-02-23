@@ -12,7 +12,7 @@
     <tr style="cursor: pointer"  *ngFor="let book of books" (click)="goToDetailPage(book.id)">
       <td>{{ book.libraryMap }}</td>
       <td>{{ book.author }}</td>
-      <td width="65%">{{ book.title }}<div *ngIf="descriptionFound(book.description)" class="description">{{ shortenDescription(book.description) }}</div></td>
+      <td class="booklist">{{ book.title }}<div *ngIf="descriptionFound(book.description)" class="description">{{ shortenDescription(book.description) }}</div></td>
     </tr>
     </tbody>
   </table>

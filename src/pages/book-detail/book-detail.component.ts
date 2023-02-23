@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../shared/services/modal.service';
 
 import * as JSZip from 'jszip';
+import {Identifier} from '../../models/identifier.model';
 
 @Component({
     selector: 'app-book-detail',
@@ -28,18 +29,27 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     bookId: number;
     userId: number;
     bookDescription: string;
-    cutPosition: number;
-    isMyBookVar = false;
-    showMore = false;
-    showLess = false;
+    // cutPosition: number;
+    // isMyBookVar = false;
+    // showMore = false;
+    // showLess = false;
     editMode = false;
     isReadOrg: boolean;
     isMailModalActive = false;
     isCopyModalActive = false;
 
-    constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location, private router: Router,
+    constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location,
+                private router: Router,
                 private toastr: ToastrService, private userService: UserService, private fb: FormBuilder,
-                private modalService: ModalService, private userSettingsService: UserSettingsService) { }
+                private modalService: ModalService, private userSettingsService: UserSettingsService) {
+
+      this.book = new Book();
+      this.detailForm = FormGroup.prototype;
+      this.bookId = 0;
+      this.userId = 0;
+      this.bookDescription = '';
+      this.isReadOrg = false;
+    }
 
 
     ngOnInit() {
@@ -51,6 +61,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
         mailTo: ''
       });
       this.route.paramMap.subscribe(params => {
+          // @ts-ignore
           this.bookId = +params.get('id');
           this.loadBook();
       });
@@ -77,6 +88,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.componentDestroyed$))
           .subscribe(book => {
             this.book = book;
+            console.log('image: ' + book.tempImageLink);
             this.detailForm.value.isRead = this.stringToBoolean(book.isRead);
             this.bookDescription = book.description;
         });
@@ -103,7 +115,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-  public hasValue(value): boolean {
+  public hasValue(value: string): boolean {
     if (value === null) {
       return false;
     } else {
@@ -111,7 +123,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  public createIdentifier(identifier) {
+  public createIdentifier(identifier: Identifier) {
     if (this.hasValue(identifier.scheme)) {
       return identifier.scheme + ':' + identifier.value;
     } else {
@@ -165,10 +177,10 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
   public save() {
     if (this.detailForm.value.isbn.length > 0) {
-      let bookToSave: Book = this.book;
+      const bookToSave: Book = this.book;
       bookToSave.isbn = this.detailForm.value.isbn;
       bookToSave.isRead = this.booleanToString(this.detailForm.value.isRead);
-      //alert(JSON.stringify(bookToSave));
+      // alert(JSON.stringify(bookToSave));
       // post won't execute without subscribe. After calling succesfully, go back to last page
       this.bookService.updateBook(bookToSave)
         .pipe(take(1))
@@ -178,17 +190,17 @@ export class BookDetailComponent implements OnInit, OnDestroy {
             this.location.back();
           }
         });
-     }
-     this.editMode = false;
+      }
+    this.editMode = false;
   }
 
   public browse() {
-    var name = '';
+    let name = '';
     if (this.book.authors[0] !== undefined) {
       name = this.book.authors[0].name + ' ';
     }
-    var search = name  + this.book.title
-    search = search.replace(" ", "+");
+    let search = name  + this.book.title;
+    search = search.replace(' ', '+');
 
     window.open('https://www.google.nl/search?q=' + search, '_blank');
   }
@@ -198,13 +210,12 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   }
 
   public readImageLink(book: Book): string {
-    var bookImageLink  = book.imageLink;
-    var imageLink = '';
+    const bookImageLink  = book.tempImageLink;
+    let imageLink = '';
 
     if (bookImageLink.toLowerCase().startsWith('http')) {
       imageLink = bookImageLink;
     } else if (book.extension.toLowerCase() === 'epub') {
-//        console.log('bookImageLink --> ' + bookImageLink);
 //        console.log('book.filename --> ' + book.filename);
 //       var epub = new JSZip();
 //        epub.file(book.filename);
@@ -236,16 +247,16 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  private stringToBoolean(value) {
+  private stringToBoolean(value: string) {
      return value === 'Y';
   }
 
-  private booleanToString(value) {
+  private booleanToString(value: boolean) {
     if (value) {
-      return "Y";
+      return 'Y';
     }
     else {
-      return "N";
+      return 'N';
     }
   }
 

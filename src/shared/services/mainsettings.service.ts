@@ -18,7 +18,8 @@ export class MainSettingsService extends BaseService {
     return this.fb.group({
       id: '',
       libraryMap: ['', Validators.required],
-      calibreCommand: ['', Validators.required]
+      calibreCommand: ['', Validators.required],
+      tempMap: ['', Validators.required],
     });
   }
 

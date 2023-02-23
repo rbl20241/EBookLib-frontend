@@ -27,7 +27,11 @@ export class BookListComponent implements OnChanges {
 
     private pageNumber = 1;
 
-    constructor() { }
+    constructor() {
+      this.books = [new Book()];
+      this.totalNbrBooks = 0;
+      this.pageSize = 0;
+    }
 
     public ngOnChanges() {
         // if a component fails to define input params, ask for new books
@@ -59,11 +63,11 @@ export class BookListComponent implements OnChanges {
         this.onLoadMoreBooks.emit(this.pageNumber);
     }
 
-    public descriptionFound(description): boolean {
-      return !description.startsWith("Helaas geen beschrijving");
+    public descriptionFound(description: string): boolean {
+      return !description.startsWith('Helaas geen beschrijving');
     }
 
-    public shortenDescription(description) {
+    public shortenDescription(description: string) {
       if (description.length > 250) {
         return description.substring(0, 250).concat('...');
       } else {

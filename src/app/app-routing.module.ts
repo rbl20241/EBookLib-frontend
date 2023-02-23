@@ -17,14 +17,15 @@ import { BookSearchComponent } from '../pages/book-search/book-search.component'
 const routes: Routes = [
 { path: 'books', canActivate: [AuthGuardService], component: AllBooksComponent},
 { path: 'book/:id', canActivate: [AuthGuardService], component: BookDetailComponent},
-{ path: 'login', component: LoginForm },
+{ path: 'auth/signin', component: LoginForm },
 { path: 'books/update', canActivate: [AuthGuardService], component: BooksUpdateComponent},
 { path: 'genre/:genreType', canActivate: [AuthGuardService], component: BookTypeComponent },
-{ path: 'search/:whatToSearch/:query/:genre/:category/:extension/:language', canActivate: [AuthGuardService], component: BookSearchComponent },
+{ path: 'search/:whatToSearch/:query/:genre/:category/:extension/:language',
+  canActivate: [AuthGuardService], component: BookSearchComponent },
 { path: 'usersettings', canActivate: [AuthGuardService], component: UserSettingsComponent },
 { path: 'mainsettings', canActivate: [AuthGuardService], component: MainSettingsComponent },
 { path: 'rename', canActivate: [AuthGuardService], component: RenameComponent },
-{ path: 'register', component: RegisterComponent },
+{ path: 'auth/signup', component: RegisterComponent },
 { path: '', canActivate: [AuthGuardService], component: HomeComponent}
 ];
 

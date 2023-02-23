@@ -49,7 +49,8 @@ export class BookService extends BaseService {
     return this.httpClient.put<string>(url, book, {headers: this.constructAuthHeaders()});
   }
 
-  public searchBooks(whatToSearch, query, genre, category, extension, language, size, pageNum): Observable<Page> {
+  public searchBooks(whatToSearch: string, query: string, genre: string, category: string,
+                     extension: string, language: string, size: number, pageNum: number): Observable<Page> {
     const parms = new HttpParams()
       .append('whatToSearch', whatToSearch)
       .append('query', query)
@@ -70,7 +71,7 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>(url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
-  public copyBook(id: number, copyTo: string) : Observable<Book> {
+  public copyBook(id: number, copyTo: string): Observable<Book> {
     const parms = new HttpParams()
       .append('bookId', String(id))
       .append('copyTo', String(copyTo));
@@ -78,12 +79,12 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
-  public sendBook(id: number, mailTo: string) : Observable<Book> {
+  public sendBook(id: number, mailTo: string): Observable<Book> {
     const parms = new HttpParams()
       .append('bookId', String(id))
       .append('mailTo', String(mailTo));
     const url = this.booksUrl + '/mail';
-    console.log(url + ' ' + id)
+    console.log(url + ' ' + id);
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
@@ -92,7 +93,7 @@ export class BookService extends BaseService {
       .append('bookId', String(id))
       .append('mailTo', String('rene.ordina@gmail.com'));
     const url = this.booksUrl + '/calibre';
-    console.log(url + ' ' + id)
+    console.log(url + ' ' + id);
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 

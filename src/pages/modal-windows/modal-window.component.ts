@@ -14,10 +14,11 @@ import { ModalService } from 'src/shared/services/modal.service';
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
-  private element: any;
+  private readonly element: any;
 
   constructor(private modalService: ModalService, private el: ElementRef) {
     this.element = el.nativeElement;
+    this.id = '';
   }
 
   ngOnInit(): void {
@@ -39,7 +40,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   }
     // });
 
-    // add self (this modal instance) to the modal service so it's accessible from controllers
+    // add self (this modal instance) to the modal service, so it's accessible from controllers
     this.modalService.add(this);
   }
 

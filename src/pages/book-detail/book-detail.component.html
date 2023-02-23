@@ -5,7 +5,7 @@
       <tr>
         <td class="col-left">
           <div class="left-margin">
-            <span *ngIf="book.imageLink"><img class="image-shadow" [src]="readImageLink(book)"/></span>
+            <span *ngIf="book.tempImageLink"><img class="image-shadow" [src]="readImageLink(book)" alt="Cover"/></span>
             <form [formGroup]="detailForm">
               <table class="detail-table-left">
                 <tr class="col" *ngFor="let author of book.authors; let first = first">

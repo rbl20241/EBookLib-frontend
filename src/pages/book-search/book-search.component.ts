@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { BookService } from 'src/shared/services/book.service';
 import {Book} from '../../models/book.model';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {take, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
@@ -24,19 +24,28 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   totalNbrBooks: number;
   pageSize = 10;
 
-  constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,  private router: Router) { }
+  constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,  private router: Router) {
+    this.allBooks = [new Book()];
+    this.whatToSearch = '';
+    this.query = '';
+    this.genre = '';
+    this.category = '';
+    this.extension = '';
+    this.language = '';
+    this.totalNbrBooks = 0;
+  }
 
   ngOnInit() {
     this.activatedRoute.paramMap
       .pipe(take(1))
       .subscribe(params => {
-      this.whatToSearch = params.get('whatToSearch');
-      this.query = params.get('query');
-      this.genre = params.get('genre');
-      this.category = params.get('category');
-      this.extension = params.get('extension');
-      this.language = params.get('language');
-      this.loadBooksForPage(1);
+        this.whatToSearch = this.getStringParam(params, 'whatToSearch');
+        this.query = this.getStringParam(params, 'query');
+        this.genre = this.getStringParam(params, 'genre');
+        this.category = this.getStringParam(params, 'category');
+        this.extension = this.getStringParam(params, 'extension');
+        this.language = this.getStringParam(params, 'language');
+        this.loadBooksForPage(1);
     });
   }
 
@@ -46,7 +55,8 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   }
 
   public loadBooksForPage(pageNbr: number) {
-    this.bookService.searchBooks(this.whatToSearch, this.query, this.genre, this.category, this.extension, this.language, this.pageSize, pageNbr)
+    this.bookService
+      .searchBooks(this.whatToSearch, this.query, this.genre, this.category, this.extension, this.language, this.pageSize, pageNbr)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(page => {
       this.allBooks = page.content;
@@ -67,6 +77,15 @@ export class BookSearchComponent implements OnInit, OnDestroy {
       return 'Beschrijving';
     } else {
       return value === 'undefined' ? '-' : value;
+    }
+  }
+
+  private getStringParam(params: ParamMap, param: string): string {
+    const value = params.get(param);
+    if (typeof value === 'string') {
+      return value;
+    } else {
+      return '';
     }
   }
 

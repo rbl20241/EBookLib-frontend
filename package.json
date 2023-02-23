@@ -1,6 +1,6 @@
 {
   "name": "ebooklibrary-frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "node server_start.js",
@@ -29,6 +29,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@popperjs/core": "^2.11.6",
     "angular-bootstrap-md": "^14.0.0",
+    "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.3",
     "bootstrap-material-design": "^4.1.3",
     "chokidar": "^3.5.3",
@@ -66,7 +67,7 @@
     "fsevents": "^2.3.2"
   },
   "engines": {
-    "node": "~12.16.1",
-    "npm": "~6.14.5"
+    "node": "v18.12.1",
+    "npm": "9.2.0"
   }
 }

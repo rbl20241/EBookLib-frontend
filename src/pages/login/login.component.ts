@@ -19,7 +19,9 @@ export class LoginForm implements OnInit {
     errMessage = false;
 
     constructor(private loginService: LoginService, private userService: UserService, private authService: AuthService,
-                              private router: Router, private appComponent: AppComponent) { }
+                private router: Router, private appComponent: AppComponent) {
+      this.loginForm = FormGroup.prototype;
+    }
 
   ngOnInit() {
     this.loginForm = this.loginService.constructLoginForm();
@@ -28,7 +30,7 @@ export class LoginForm implements OnInit {
   // convenience getters for easy access to form fields
   get ctrls() { return this.loginForm.controls; }
   get username() { return this.ctrls.username; }
-  get password() { return this.ctrls.password }
+  get password() { return this.ctrls.password; }
 
 
   /**
@@ -47,6 +49,7 @@ export class LoginForm implements OnInit {
       if (loggedIn) {
           this.appComponent.replaceLoginText(user.username);
           this.router.navigateByUrl('/');
+//          this.router.navigate(['/']);
       } else {
         this.errMessage = true;
       }
