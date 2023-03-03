@@ -91,9 +91,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public showSearchBookList(whatToSearch: string, query: string, genre: string, category: string, extension: string, language: string) {
-      const url = `search/${whatToSearch}/${query}/${genre}/${category}/${extension}/${language}`;
-      console.log('searchUrl -> ' + url);
-      this.router.navigateByUrl(`search/${whatToSearch}/${query}/${genre}/${category}/${extension}/${language}`);
+      const tmpQuery = query === '' ? '-' : query;
+      const tmpGenre = genre === '' ? '-' : genre;
+      const tmpCategory = category === '' ? '-' : category;
+      const tmpExtension = extension === '' ? '-' : extension;
+      const tmpLanguage = language === '' ? '-' : language;
+      this.router.navigateByUrl(`search/${whatToSearch}/${tmpQuery}/${tmpGenre}/${tmpCategory}/${tmpExtension}/${tmpLanguage}`);
     }
 
     public browseAllBooks() {
