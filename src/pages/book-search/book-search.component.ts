@@ -25,7 +25,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   pageSize = 10;
 
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,  private router: Router) {
-    this.allBooks = [new Book()];
+    // this.allBooks = [new Book()];
     this.whatToSearch = '';
     this.query = '';
     this.genre = '';
@@ -55,6 +55,14 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   }
 
   public loadBooksForPage(pageNbr: number) {
+    console.log('whatToSearch -> ' + this.whatToSearch);
+    console.log('query -> ' + this.query);
+    console.log('genre -> ' + this.genre);
+    console.log('category -> ' + this.category);
+    console.log('extension -> ' + this.extension);
+    console.log('language -> ' + this.language);
+    console.log('pageSize -> ' + this.pageSize);
+    console.log('pageNbr -> ' + pageNbr);
     this.bookService
       .searchBooks(this.whatToSearch, this.query, this.genre, this.category, this.extension, this.language, this.pageSize, pageNbr)
       .pipe(takeUntil(this.componentDestroyed$))

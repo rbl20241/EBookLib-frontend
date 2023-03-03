@@ -59,6 +59,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.getAllGenres();
       this.getAllCategories();
       this.whatToSearch = 'searchTitleOrAuthor';
+      this.searchGenre = '-';
+      this.searchCategory = '-';
+      this.searchExtension = '-';
+      this.searchLanguage = '-';
     }
 
     ngOnDestroy(): void {
@@ -87,6 +91,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public showSearchBookList(whatToSearch: string, query: string, genre: string, category: string, extension: string, language: string) {
+      const url = `search/${whatToSearch}/${query}/${genre}/${category}/${extension}/${language}`;
+      console.log('searchUrl -> ' + url);
       this.router.navigateByUrl(`search/${whatToSearch}/${query}/${genre}/${category}/${extension}/${language}`);
     }
 

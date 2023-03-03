@@ -37,6 +37,10 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     isReadOrg: boolean;
     isMailModalActive = false;
     isCopyModalActive = false;
+    loading = false;
+    cover: File = null;
+    emptyCoverImage = 'assets/images/book.jpg';
+    coverUrl = 'http://localhost:4200';
 
     constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location,
                 private router: Router,
@@ -75,6 +79,18 @@ export class BookDetailComponent implements OnInit, OnDestroy {
       this.componentDestroyed$.next(true);
       this.componentDestroyed$.complete();
     }
+
+    // onUpload() {
+    //   this.loading = !this.loading;
+    //   this.cover = this.getCoverFile(this.book);
+    //   this.bookService.uploadCover(this.cover).subscribe(
+    //     (event: any) => {
+    //       if (typeof (event) === 'object') {
+    //         this.loading = false;
+    //       }
+    //     }
+    //   );
+    // }
 
     // convenience getters for easy access to form fields
     get ctrls() { return this.detailForm.controls; }
@@ -209,27 +225,24 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     this.bookService.openCalibre(this.bookId).subscribe(data => this.showToaster('C'));
   }
 
-  public readImageLink(book: Book): string {
+  public readImageLink(book: Book) {
     const bookImageLink  = book.tempImageLink;
-    let imageLink = '';
+    let coverFile;
 
-    if (bookImageLink.toLowerCase().startsWith('http')) {
-      imageLink = bookImageLink;
-    } else if (book.extension.toLowerCase() === 'epub') {
-//        console.log('book.filename --> ' + book.filename);
-//       var epub = new JSZip();
-//        epub.file(book.filename);
-//        epub.folder('images').forEach(function (relativePath, file) {
-//                                        console.log("relative path:", relativePath, "file full path:", file.name);
-//                                      });
-//       epub.loadAsync(book.imageLink)
+    if (bookImageLink) {
+//      coverFile = new File([''], bookImageLink);
+      coverFile = new File([''], this.emptyCoverImage);
+    } else {
+      coverFile = new File([''], this.emptyCoverImage);
     }
 
-    if (imageLink.length === 0) {
-      imageLink = 'assets/images/book.jpg';
-    }
-
-    return imageLink;
+    // const url = this.coverUrl + '/book/' + book.id + '/cover';
+    //
+    // this.bookService.uploadCover(url, coverFile);
+    //
+    // console.log('coverFile -> ' + url + '/' + coverFile.name);
+    // return url + '/' + coverFile.name;
+    return coverFile.name;
   }
 
   private showToaster(action: string) {

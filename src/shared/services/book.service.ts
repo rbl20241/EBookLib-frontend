@@ -97,4 +97,12 @@ export class BookService extends BaseService {
     return this.httpClient.get<Book>( url, {params: parms, headers: this.constructAuthHeaders()});
   }
 
+  uploadCover(url: string, cover: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('coverImage', cover);
+
+    console.log('url cover -> ' + url);
+    console.log('formData  -> ' + formData);
+    return this.httpClient.post(url, formData);
+  }
 }
