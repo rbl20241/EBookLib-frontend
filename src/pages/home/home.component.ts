@@ -59,10 +59,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.getAllGenres();
       this.getAllCategories();
       this.whatToSearch = 'searchTitleOrAuthor';
-      this.searchGenre = '-';
-      this.searchCategory = '-';
-      this.searchExtension = '-';
-      this.searchLanguage = '-';
     }
 
     ngOnDestroy(): void {
