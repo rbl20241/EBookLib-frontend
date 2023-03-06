@@ -41,6 +41,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     cover: File = null;
     emptyCoverImage = 'assets/images/book.jpg';
     coverUrl = 'http://localhost:4200';
+    imageUrl = '';
 
     constructor(private bookService: BookService, private route: ActivatedRoute, private location: Location,
                 private router: Router,
@@ -48,22 +49,22 @@ export class BookDetailComponent implements OnInit, OnDestroy {
                 private modalService: ModalService, private userSettingsService: UserSettingsService) {
 
       this.book = new Book();
-      this.detailForm = FormGroup.prototype;
+      this.detailForm = this.fb.group({
+        avatar: [null],
+        name: [''],
+        isbn: '',
+        isRead: false,
+        copyTo: '',
+        mailTo: ''
+      });
       this.bookId = 0;
       this.userId = 0;
       this.bookDescription = '';
       this.isReadOrg = false;
     }
 
-
     ngOnInit() {
       this.loadUserSettings();
-      this.detailForm = this.fb.group({
-        isbn: '',
-        isRead: false,
-        copyTo: '',
-        mailTo: ''
-      });
       this.route.paramMap.subscribe(params => {
           // @ts-ignore
           this.bookId = +params.get('id');
@@ -223,6 +224,25 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
   public calibre() {
     this.bookService.openCalibre(this.bookId).subscribe(data => this.showToaster('C'));
+  }
+
+  public showCover(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    console.log(file);
+    this.detailForm.patchValue({
+      avatar: file
+    });
+    this.detailForm.get('avatar').updateValueAndValidity();
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  submit() {
+    console.log(this.detailForm.value);
   }
 
   public readImageLink(book: Book) {

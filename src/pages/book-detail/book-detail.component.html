@@ -6,11 +6,13 @@
         <td class="col-left">
           <div class="left-margin">
             <span *ngIf="book.tempImageLink">
-              <form>
                 <img id="coverImage" class="image-shadow" [src]="readImageLink(book)" alt="Cover"/>
-              </form>
             </span>
             <form [formGroup]="detailForm">
+<!--              <input type="file" accept="image/*" (change)="showCover($event)" />-->
+<!--              <div class="imagePreview" *ngIf="imageUrl && imageUrl !== ''">-->
+<!--                <img class="image-shadow" [src]="imageUrl" alt="Cover"/>-->
+<!--              </div>-->
               <table class="detail-table-left">
                 <tr class="col" *ngFor="let author of book.authors; let first = first">
                   <td *ngIf="first" class="left-col">Auteur:</td><td *ngIf="!first"></td>
